@@ -2,6 +2,7 @@ int m =1; //Motor Vector
 //int uTurn = ?;
 //int pointTurn = ?;
 
+//throw functions below
 void move(char direction){
 	if(direction) == 'f'{
 		m=1;
