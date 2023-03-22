@@ -1,5 +1,5 @@
-#pragma config(Sensor, S1,     rightS,         sensorEV3_Color, modeEV3Color_Color)
-#pragma config(Sensor, S2,     leftS,          sensorEV3_Color, modeEV3Color_Color)
+#pragma config(Sensor, S1,     leftS,         sensorEV3_Color, modeEV3Color_Color)
+#pragma config(Sensor, S2,     rightS,          sensorEV3_Color, modeEV3Color_Color)
 #pragma config(Sensor, S3,     reflect,        sensorEV3_Color)
 #pragma config(Sensor, S4,     sonarSensor,    sensorEV3_Ultrasonic)
 #pragma config(Motor,  motorA,          armMotor,      tmotorEV3_Medium, PIDControl, encoder)
@@ -13,10 +13,24 @@ void linetracking(){
 	if((getColorName(S1) == colorRed) || (getColorName(S2) == colorRed)){
 		STP();
 	}
+	if((getColorName(S1) == colorGreen) && (getColorName(S2) == colorGreen)){
+			uturn();
+	}
+	else if ((getColorName(S1)==colorGreen)&&(getColorName(S2)!=colorGreen)){
+			moveCM(lineWidthCM);
+			sleep(1000);
+			leftPointTurn();
+	}
+	else if ((getColorName(S1)!=colorGreen)&&(getColorName(S2)==colorGreen)){
+			moveCM(lineWidthCM);
+			sleep(1000);
+			rightPointTurn();
+	}
 	if((getColorName(S1) == colorBlack) && (getColorName(S2) == colorBlack)){
 		STP();
 	}
 	if((getColorName(S1) == colorWhite) && (getColorName(S2) == colorWhite)){
+		forwards();
 	}
 
 }
@@ -40,7 +54,7 @@ forwards();
 sleep(1500);
 STP();
 	repeat(forever){
-		//linetracking();
+		linetracking();
 	}
 
 }

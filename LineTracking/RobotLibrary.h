@@ -23,15 +23,6 @@ void forwards(int x){ //controled speed
 	motor[motorC] = x;
 }
 
-void moveCM(int cm){
-	float x;
-	rsMotors();
-	x=convertCMToDegrees(cm);
-	setMotorTarget(motorB, x, speed);
-	setMotorTarget(motorC, x, speed);
-	waitUntilMotorStop(motorB);
-}
-
 void uturn(){
 	rsMotors();
 	setMotorTarget(motorB,uTurn,50);
@@ -61,9 +52,17 @@ float convertEncoderToCM(int encoderCounts){
 }
 
 float convertCMToDegrees(int CM){
-	return((CM/(WheelDiamterMM*PI)*360);
+	return(CM/(WheelDiamterCM*PI)*360);
 }
 
+void moveCM(int cm){
+	float x;
+	rsMotors();
+	x=convertCMToDegrees(cm);
+	setMotorTarget(motorB, x, speed);
+	setMotorTarget(motorC, x, speed);
+	waitUntilMotorStop(motorB);
+}
 //setproperties
 
 void setUTurn(int x){
@@ -83,5 +82,5 @@ void setTurnValue(int x){
 }
 
 void setWheelDiamter(float x){
-	wheelDiamterCM=x;
+	WheelDiamterCM=x;
 }
