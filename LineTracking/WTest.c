@@ -27,8 +27,16 @@ void linetracking(){
 			rightPointTurn();
 	}
 	if((getColorName(S1) == colorBlack) && (getColorName(S2) == colorBlack)){
-		STP();
+		moveCM(lineWidthCM);
 	}
+	else if((getColorName(S1) == colorBlack) && (getColorName(S2) != colorBlack)){
+		leftNudge();
+	}
+
+	else if((getColorName(S1) != colorBlack) && (getColorName(S2) == colorBlack)){
+		rightNudge();
+	}
+
 	if((getColorName(S1) == colorWhite) && (getColorName(S2) == colorWhite)){
 		forwards();
 	}

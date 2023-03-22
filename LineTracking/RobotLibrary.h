@@ -47,9 +47,9 @@ void STP(){
 	motor[motorC] = 0;
 }
 
-float convertEncoderToCM(int encoderCounts){
+/*float convertEncoderToCM(int encoderCounts){
 	return(encoderCounts / 360.0)*(WheelDiamterCM * PI);
-}
+}*/
 
 float convertCMToDegrees(int CM){
 	return(CM/(WheelDiamterCM*PI)*360);
@@ -61,6 +61,20 @@ void moveCM(int cm){
 	x=convertCMToDegrees(cm);
 	setMotorTarget(motorB, x, speed);
 	setMotorTarget(motorC, x, speed);
+	waitUntilMotorStop(motorB);
+}
+
+void leftNudge(){
+	STP();
+	rsMotors();
+	setMotorTarget(motorC, 25, 15);
+	waitUntilMotorStop(motorC);
+}
+
+void rightNudge(){
+	STP();
+	rsMotors();
+	setMotorTarget(motorB, 25, 15);
 	waitUntilMotorStop(motorB);
 }
 //setproperties
