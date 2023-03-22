@@ -12,19 +12,20 @@
 void linetracking(){
 	if((getColorName(S1) == colorRed) || (getColorName(S2) == colorRed)){
 		STP();
+		playSound(soundBeepBeep);
 	}
 	if((getColorName(S1) == colorGreen) && (getColorName(S2) == colorGreen)){
-			uturn();
+		uturn();
 	}
 	else if ((getColorName(S1)==colorGreen)&&(getColorName(S2)!=colorGreen)){
-			moveCM(lineWidthCM);
-			sleep(1000);
-			leftPointTurn();
+		moveCM(lineWidthCM);
+		sleep(1000);
+		leftPointTurn();
 	}
 	else if ((getColorName(S1)!=colorGreen)&&(getColorName(S2)==colorGreen)){
-			moveCM(lineWidthCM);
-			sleep(1000);
-			rightPointTurn();
+		moveCM(lineWidthCM);
+		sleep(1000);
+		rightPointTurn();
 	}
 	if((getColorName(S1) == colorBlack) && (getColorName(S2) == colorBlack)){
 		moveCM(lineWidthCM);
@@ -56,11 +57,9 @@ setWheelDiamter(7.4);
 }
 
 task main(){
+clearSounds();
+clearTimer(T1);
 setProperties();
-sleep(200);
-forwards();
-sleep(1500);
-STP();
 	repeat(forever){
 		linetracking();
 	}
