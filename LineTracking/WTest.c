@@ -11,16 +11,12 @@
 
 void linetracking(){
 	if((getColorName(S1) == colorRed) || (getColorName(S2) == colorRed)){
-		stp();
+		STP();
 	}
-	if(getColorName(S1) == colorBlack){
-		stp();
-	}
-	if(getColorName(S2) == colorBlack){
-
+	if((getColorName(S1) == colorBlack) && (getColorName(S2) == colorBlack)){
+		STP();
 	}
 	if((getColorName(S1) == colorWhite) && (getColorName(S2) == colorWhite)){
-		Go('f');
 	}
 
 }
@@ -29,15 +25,22 @@ void linetracking(){
 
 }*/
 
-void setProperties(){
-
-
+void setProperties(){ //change properties here instead of headerfile
+setUTurn(340);
+setSpeed(15);
+setTurnSpeed(15);
+setTurnValue(70);
+setWheelDiamter(74);
 }
 
 task main(){
 setProperties();
+sleep(200);
+forwards();
+sleep(1500);
+STP();
 	repeat(forever){
-		linetracking();
+		//linetracking();
 	}
 
 }

@@ -1,6 +1,10 @@
-int m =1; //Motor Vector
+int m = 1; //Motor Vector
 int uTurn = 340;
 int vpointTurn = 170;
+int speed = 5*m;
+int turnSpeed = 15*m;
+int lineWidthCM = 1.8;
+float WheelDiamterMM = 5.6; //Stock ev3
 
 //throw functions below
 void rsMotors(){
@@ -8,18 +12,15 @@ void rsMotors(){
 	resetMotorEncoder(motorC);
 }
 
-void Go(char direction){
-	int speed=5*m;
-	if ((direction)=='f'){
-		rsMotors();
-		setMotorTarget(motorB,m,speed);
-		setMotorTarget(motorC,m,speed);
-	}
-	if ((direction)=='b'){
-		m=-1;
-		setMotorTarget(motorB,m,speed);
-		setMotorTarget(motorC,m,speed);
-	}
+void forwards(){ //default
+	rsMotors();
+	motor[motorB] = speed;
+	motor[motorC] = speed;
+}
+void forwards(int x){ //controled speed
+	rsMotors();
+	motor[motorB] = x;
+	motor[motorC] = x;
 }
 
 void uturn(){
@@ -28,22 +29,50 @@ void uturn(){
 	setMotorTarget(motorC,-uTurn,50);
 }
 
-void pointTurn(char direction){
-	if ((direction)=='l'){ //Turn Left
-		rsMotors();
-		setMotorTarget(motorB,vpointTurn,30);
-		setMotorTarget(motorC,-vpointTurn,30);
-	}
-
-	if ((direction)=='r'){//Turn right
-		rsMotors();
-		setMotorTarget(motorB,-vpointTurn,30);
-		setMotorTarget(motorC,vpointTurn,30);
-	}
+void leftPointTurn(){
+	rsMotors();
+	setMotorTarget(motorB,vpointTurn,turnSpeed);
+	setMotorTarget(motorC,-vpointTurn,turnSpeed);
 }
 
-void stp(){
+void rightPointTurn(){
 	rsMotors();
-	setMotorTarget(motorB,0,0);
-	setMotorTarget(motorC,0,0);
+	setMotorTarget(motorB,-vpointTurn,turnSpeed);
+	setMotorTarget(motorC,vpointTurn,turnSpeed);
+}
+
+void STP(){
+	rsMotors();
+	motor[motorB] = 0;
+	motor[motorC] = 0;
+}
+
+float convertEncoderToCM(int encoderCounts){
+	return(encoderCounts / 360.0)*(WheelDiamterMM * PI);
+}
+
+float convertCMToDegrees(int CM){
+	return((CM/(WheelDiamterMM*PI)*360);
+}
+
+//setproperties
+
+void setUTurn(int x){
+	uTurn=x;
+}
+
+void setSpeed(int x){
+	speed=x;
+}
+
+void setTurnSpeed(int x){
+	turnSpeed=x;
+}
+
+void setTurnValue(int x){
+	vpointTurn=x;
+}
+
+void setWheelDiamter(float x){
+	wheelDiamterMM=x;
 }
