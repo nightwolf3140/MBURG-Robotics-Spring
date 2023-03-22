@@ -30,7 +30,7 @@ setUTurn(340);
 setSpeed(15);
 setTurnSpeed(15);
 setTurnValue(70);
-setWheelDiamter(74);
+setWheelDiamter(7.4);
 }
 
 task main(){

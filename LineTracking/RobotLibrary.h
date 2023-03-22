@@ -4,7 +4,7 @@ int vpointTurn = 170;
 int speed = 5*m;
 int turnSpeed = 15*m;
 int lineWidthCM = 1.8;
-float WheelDiamterMM = 5.6; //Stock ev3
+float WheelDiamterCM = 5.6; //Stock ev3
 
 //throw functions below
 void rsMotors(){
@@ -21,6 +21,15 @@ void forwards(int x){ //controled speed
 	rsMotors();
 	motor[motorB] = x;
 	motor[motorC] = x;
+}
+
+void moveCM(int cm){
+	float x;
+	rsMotors();
+	x=convertCMToDegrees(cm);	
+	setMotorTarget(motorB, x, speed);
+	setMotorTarget(motorC, x, speed);
+	waitUntilMotorStop(motorC);
 }
 
 void uturn(){
@@ -48,7 +57,7 @@ void STP(){
 }
 
 float convertEncoderToCM(int encoderCounts){
-	return(encoderCounts / 360.0)*(WheelDiamterMM * PI);
+	return(encoderCounts / 360.0)*(WheelDiamterCM * PI);
 }
 
 float convertCMToDegrees(int CM){
@@ -74,5 +83,5 @@ void setTurnValue(int x){
 }
 
 void setWheelDiamter(float x){
-	wheelDiamterMM=x;
+	wheelDiamterCM=x;
 }
