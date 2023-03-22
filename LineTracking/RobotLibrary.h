@@ -26,10 +26,10 @@ void forwards(int x){ //controled speed
 void moveCM(int cm){
 	float x;
 	rsMotors();
-	x=convertCMToDegrees(cm);	
+	x=convertCMToDegrees(cm);
 	setMotorTarget(motorB, x, speed);
 	setMotorTarget(motorC, x, speed);
-	waitUntilMotorStop(motorC);
+	waitUntilMotorStop(motorB);
 }
 
 void uturn(){
