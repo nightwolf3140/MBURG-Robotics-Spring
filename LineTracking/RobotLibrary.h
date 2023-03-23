@@ -16,11 +16,15 @@ void rsMotors(){
 
 void forwards(){ //default
 	rsMotors();
-	setMultipleMotors(speed, motorB, motorC);
+	//setMultipleMotors(speed, motorB, motorC);
+	motor[motorB] = speed;
+	motor[motorC] = speed;
 }
 void forwards(int x){ //controled speed
 	rsMotors();
-	setMultipleMotors(x, motorB, motorC);
+	//setMultipleMotors(x, motorB, motorC);
+	motor[motorB] = x;
+	motor[motorC] = x;
 }
 
 void uTurn(){
@@ -43,7 +47,8 @@ void rightPointTurn(){
 
 void STP(){ //kinda irelivant with stopAllMotors();
 	rsMotors();
-	stopAllMotors();
+	motor[motorB] = 0;
+	motor[motorC] = 0;
 }
 
 /*float convertEncoderToCM(int encoderCounts){
