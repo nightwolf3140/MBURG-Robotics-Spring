@@ -1,10 +1,11 @@
 int m = 1; //Motor Vector
-int uTurn = 340;
-int vpointTurn = 170;
+int uTurnValue = 340;
+int vpointTurn = 170; //point turn value
 int speed = 5*m;
-int turnSpeed = 15*m;
-int lineWidthCM = 1.8;
+int turnSpeed = 15*m; //speed times direction (positive/negative)
+int lineWidthCM = 1.8; //distance of tape line
 float WheelDiamterCM = 5.6; //Stock ev3
+
 
 //throw functions below
 void rsMotors(){
@@ -14,19 +15,17 @@ void rsMotors(){
 
 void forwards(){ //default
 	rsMotors();
-	motor[motorB] = speed;
-	motor[motorC] = speed;
+	setMultipleMotors(speed, motorB, motorC);
 }
 void forwards(int x){ //controled speed
 	rsMotors();
-	motor[motorB] = x;
-	motor[motorC] = x;
+	setMultipleMotors(x, motorB, motorC);
 }
 
-void uturn(){
+void uTurn(){
 	rsMotors();
-	setMotorTarget(motorB,uTurn,50);
-	setMotorTarget(motorC,-uTurn,50);
+	setMotorTarget(motorB,uTurnValue,50);
+	setMotorTarget(motorC,-uTurnValue,50);
 }
 
 void leftPointTurn(){
@@ -41,21 +40,20 @@ void rightPointTurn(){
 	setMotorTarget(motorC,vpointTurn,turnSpeed);
 }
 
-void STP(){
+void STP(){ //kinda irelivant with stopAllMotors();
 	rsMotors();
-	motor[motorB] = 0;
-	motor[motorC] = 0;
+	stopAllMotors();
 }
 
 /*float convertEncoderToCM(int encoderCounts){
 	return(encoderCounts / 360.0)*(WheelDiamterCM * PI);
 }*/
 
-float convertCMToDegrees(int CM){
+float convertCMToDegrees(int CM){ //converts CM imput to wheel degrees
 	return(CM/(WheelDiamterCM*PI)*360);
 }
 
-void moveCM(int cm){
+void moveCM(int cm){ //move given distance in CM
 	float x;
 	rsMotors();
 	x=convertCMToDegrees(cm);
@@ -76,6 +74,15 @@ void rightNudge(){
 	rsMotors();
 	setMotorTarget(motorB, 25, 15);
 	waitUntilMotorStop(motorB);
+}
+
+void init(){ //First line of code to run
+clearSounds();
+clearTimer(T1);
+eraseDisplay();
+rsMotors();
+bFloatDuringInactiveMotorPWM=false; //Motor coasting
+setProperties(); //config settings
 }
 //setproperties
 
