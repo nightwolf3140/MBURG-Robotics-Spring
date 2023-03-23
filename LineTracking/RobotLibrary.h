@@ -5,6 +5,7 @@ int speed = 5*m;
 int turnSpeed = 15*m; //speed times direction (positive/negative)
 int lineWidthCM = 1.8; //distance of tape line
 float WheelDiamterCM = 5.6; //Stock ev3
+int WallDistCM = 8;
 
 
 //throw functions below
@@ -76,14 +77,13 @@ void rightNudge(){
 	waitUntilMotorStop(motorB);
 }
 
-void init(){ //First line of code to run
-clearSounds();
-clearTimer(T1);
-eraseDisplay();
-rsMotors();
-bFloatDuringInactiveMotorPWM=false; //Motor coasting
-setProperties(); //config settings
+void checkObstacle(){
+	bool wall;
+	while(getUSDistance(distanceCM) > WallDistCM){
+		return(wall = true);
+	}
 }
+
 //setproperties
 
 void setUTurn(int x){
@@ -104,4 +104,17 @@ void setTurnValue(int x){
 
 void setWheelDiamter(float x){
 	WheelDiamterCM=x;
+}
+
+void setWallDist(flaot x){
+	WallDistCM=x;
+}
+
+void init(){ //First line of code to run
+clearSounds();
+clearTimer(T0);
+eraseDisplay();
+rsMotors();
+bFloatDuringInactiveMotorPWM=false; //Motor coasting
+setProperties(); //config settings
 }

@@ -64,8 +64,12 @@ void linetracking(){
 
 }
 
-/*void avoidObstacle(){
-
+/*void avoidObstacle(){ //Logic here makes no sense take a look at later
+	bool wall = checkObstacle();
+	//if(checkObstacle() == true){//would this work? not sure
+	if((wall) == true){
+	
+	}
 }*/
 
 void setProperties(){ //change properties here instead of headerfile
@@ -74,6 +78,7 @@ setSpeed(15);
 setTurnSpeed(15);
 setTurnValue(70);
 setWheelDiamter(7.4);
+setWallDist(8); //Units in CM
 }
 
 task main(){
