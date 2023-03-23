@@ -77,7 +77,7 @@ void rightNudge(){
 	waitUntilMotorStop(motorB);
 }
 
-void checkObstacle(){
+bool checkObstacle(){
 	bool wall;
 	while(getUSDistance(distanceCM) > WallDistCM){
 		return(wall = true);
