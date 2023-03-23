@@ -79,15 +79,20 @@ void rightNudge(){
 
 bool checkObstacle(){
 	bool wall;
-	while(getUSDistance(distanceCM) > WallDistCM){
-		return(wall = true);
+	if(getUSDistance(S4) > WallDistCM){
+		wall = true;
+		return wall;
+	}
+	else{
+		wall = false;
+		return wall;
 	}
 }
 
 //setproperties
 
 void setUTurn(int x){
-	uTurn=x;
+	uTurnValue=x;
 }
 
 void setSpeed(int x){
@@ -106,13 +111,22 @@ void setWheelDiamter(float x){
 	WheelDiamterCM=x;
 }
 
-void setWallDist(flaot x){
+void setWallDist(float x){
 	WallDistCM=x;
+}
+
+void setProperties(){ //change properties here instead of headerfile
+setUTurn(340);
+setSpeed(15);
+setTurnSpeed(15);
+setTurnValue(70);
+setWheelDiamter(7.4);
+setWallDist(8); //Units in CM
 }
 
 void init(){ //First line of code to run
 clearSounds();
-clearTimer(T0);
+clearTimer(T1);
 eraseDisplay();
 rsMotors();
 bFloatDuringInactiveMotorPWM=false; //Motor coasting

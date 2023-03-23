@@ -19,11 +19,11 @@
 
 */
 task display(){//Onboard Debugger system
-	repeat(forver){
+	repeat(forever){
 		displayCenteredTextLine(1, "Onboard Debugger");
 		displayBigTextLine(3, "LCS: %d", getColorName(leftS)); //left sensor
 		displayBigTextLine(6, "RCS: %d", getColorName(rightS)); //Right sensor
-		displayBigTextLine(8, "USS: %d", getUSDistance(distanceCM)); //Ultrasonic sensor
+		displayBigTextLine(8, "USS: %d", getUSDistance(S4)); //Ultrasonic sensor
 		displayBigTextLine(10, "B: %d", getMotorEncoder(leftMotor));
 		displayBigTextLine(12, "C %d", getMotorEncoder(rightMotor));
 	}
@@ -64,25 +64,16 @@ void linetracking(){
 
 }
 
-/*void avoidObstacle(){ //Logic here makes no sense take a look at later
+void avoidObstacle(){
 	bool wall = checkObstacle();
-	//if(checkObstacle() == true){//would this work? not sure
-	if((wall) == true){
-	
+	if(wall == true){
+		STP();
 	}
-}*/
-
-void setProperties(){ //change properties here instead of headerfile
-setUTurn(340);
-setSpeed(15);
-setTurnSpeed(15);
-setTurnValue(70);
-setWheelDiamter(7.4);
-setWallDist(8); //Units in CM
 }
 
 task main(){
 	init(); //Config
+	startTask(display);
 	repeat(forever){
 		linetracking();
 		//avoidObstacle();
