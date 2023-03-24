@@ -60,7 +60,7 @@ void linetracking(){
 	}
 
 	if((getColorName(S1) == colorWhite) && (getColorName(S2) == colorWhite)){
-		forwards();
+		forwards(10);
 	}
 
 }

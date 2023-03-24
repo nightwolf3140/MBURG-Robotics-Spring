@@ -1,7 +1,7 @@
 int m = 1; //Motor Vector
 int uTurnValue = 340;
 int vpointTurn = 170; //point turn value
-int speed = 5*m;
+int speed = 5;
 int turnSpeed = 15*m; //speed times direction (positive/negative)
 int lineWidthCM = 1.8; //distance of tape line
 float WheelDiamterCM = 5.6; //Stock ev3
@@ -14,12 +14,12 @@ void rsMotors(){
 	resetMotorEncoder(motorC);
 }
 
-void forwards(){ //default
+/*void forwards(){ //default
 	rsMotors();
 	//setMultipleMotors(speed, motorB, motorC);
 	motor[motorB] = speed;
 	motor[motorC] = speed;
-}
+}*/
 void forwards(int x){ //controled speed
 	rsMotors();
 	//setMultipleMotors(x, motorB, motorC);
@@ -35,14 +35,18 @@ void uTurn(){
 
 void leftPointTurn(){
 	rsMotors();
-	setMotorTarget(motorB,vpointTurn,turnSpeed);
-	setMotorTarget(motorC,-vpointTurn,turnSpeed);
+	setMotorTarget(motorB,-vpointTurn,turnSpeed);
+	setMotorTarget(motorC,vpointTurn,turnSpeed);
+	waitUntilMotorStop(motorC);
+	sleep(200);
 }
 
 void rightPointTurn(){
 	rsMotors();
-	setMotorTarget(motorB,-vpointTurn,turnSpeed);
-	setMotorTarget(motorC,vpointTurn,turnSpeed);
+	setMotorTarget(motorB,vpointTurn,turnSpeed);
+	setMotorTarget(motorC,-vpointTurn,turnSpeed);
+	waitUntilMotorStop(motorC);
+	sleep(200);
 }
 
 void STP(){ //kinda irelivant with stopAllMotors();
@@ -123,7 +127,7 @@ void setWallDist(float x){
 void setProperties(){ //change properties here instead of headerfile
 setUTurn(340);
 setSpeed(15);
-setTurnSpeed(15);
+setTurnSpeed(10);
 setTurnValue(70);
 setWheelDiamter(7.4);
 setWallDist(8); //Units in CM
