@@ -6,6 +6,7 @@ int turnSpeed = 15*m; //speed times direction (positive/negative)
 int lineWidthCM = 1.8; //distance of tape line
 float WheelDiamterCM = 5.6; //Stock ev3
 int WallDistCM = 8;
+int searchTime = 2;
 
 
 //throw functions below
@@ -75,14 +76,14 @@ void moveCM(int cm){ //move given distance in CM
 void leftNudge(){
 	STP();
 	rsMotors();
-	setMotorTarget(motorC, 25, 15);
+	setMotorTarget(motorC, 10, 10);
 	waitUntilMotorStop(motorC);
 }
 
 void rightNudge(){
 	STP();
 	rsMotors();
-	setMotorTarget(motorB, 25, 15);
+	setMotorTarget(motorB, 10, 10);
 	waitUntilMotorStop(motorB);
 }
 
@@ -95,6 +96,29 @@ bool checkObstacle(){
 	else{
 		wall = false;
 		return wall;
+	}
+}
+
+void searchRight(){
+	motor[motorB] = -turnSpeed;
+	motor[motorC] = turnSpeed;
+}
+
+void searchLeft(){
+	motor[motorB] = turnSpeed;
+	motor[motorC] = -turnSpeed;
+}
+
+
+void findLine(){
+	clearTimer(T1);
+	if((time1[T1] < searchTime) && (getColorName(S2) == colorWhite)){
+		searchRight();
+	}
+	else if ((time1[T1] < searchTime) && (getColorName(S1) == colorWhite)){
+		STP();
+		sleep(200);
+		searchLeft();
 	}
 }
 
@@ -122,22 +146,4 @@ void setWheelDiamter(float x){
 
 void setWallDist(float x){
 	WallDistCM=x;
-}
-
-void setProperties(){ //change properties here instead of headerfile
-setUTurn(340);
-setSpeed(15);
-setTurnSpeed(10);
-setTurnValue(70);
-setWheelDiamter(7.4);
-setWallDist(8); //Units in CM
-}
-
-void init(){ //First line of code to run
-clearSounds();
-clearTimer(T1);
-eraseDisplay();
-rsMotors();
-bFloatDuringInactiveMotorPWM=false; //Motor coasting
-setProperties(); //config settings
 }

@@ -50,6 +50,8 @@ void linetracking(){
 	}
 	if((getColorName(S1) == colorBlack) && (getColorName(S2) == colorBlack)){
 		moveCM(lineWidthCM);
+		findLine();
+		sleep(200);
 	}
 	else if((getColorName(S1) == colorBlack) && (getColorName(S2) != colorBlack)){
 		leftNudge();
@@ -70,6 +72,24 @@ void avoidObstacle(){
 	if(wall == true){
 		STP();
 	}
+}
+
+void setProperties(){ //change properties here instead of headerfile
+setUTurn(340);
+setSpeed(10);
+setTurnSpeed(10);
+setTurnValue(70);
+setWheelDiamter(7.4);
+setWallDist(8); //Units in CM
+}
+
+void init(){ //First line of code to run
+clearSounds();
+clearTimer(T1);
+eraseDisplay();
+rsMotors();
+bFloatDuringInactiveMotorPWM=false; //Motor coasting
+setProperties(); //config settings
 }
 
 task main(){
