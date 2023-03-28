@@ -39,32 +39,27 @@ void linetracking(){
 		uTurn();
 	}
 	else if ((getColorName(S1)==colorGreen)&&(getColorName(S2)!=colorGreen)){
-		moveCM(lineWidthCM);
-		sleep(1000);
 		leftPointTurn();
 	}
 	else if ((getColorName(S1)!=colorGreen)&&(getColorName(S2)==colorGreen)){
-		moveCM(lineWidthCM);
-		sleep(1000);
 		rightPointTurn();
 	}
 	if((getColorName(S1) == colorBlack) && (getColorName(S2) == colorBlack)){
 		moveCM(lineWidthCM);
-		findLine();
-		sleep(200);
+		findLeft();
 	}
 	else if((getColorName(S1) == colorBlack) && (getColorName(S2) != colorBlack)){
 		//leftNudge();
-		findRight();
+		findLeft();
 	}
 
 	else if((getColorName(S1) != colorBlack) && (getColorName(S2) == colorBlack)){
 		//rightNudge();
-		findRight();
+			findRight();
 	}
 
 	if((getColorName(S1) == colorWhite) && (getColorName(S2) == colorWhite)){
-		forwards(10);
+		forwards(6);
 	}
 
 }
@@ -79,8 +74,8 @@ void avoidObstacle(){
 void setProperties(){ //change properties here instead of headerfile
 setUTurn(340);
 setSpeed(10);
-setTurnSpeed(10);
-setTurnValue(70);
+setTurnSpeed(15);
+setTurnValue(170);
 setWheelDiamter(7.4);
 setWallDist(8); //Units in CM
 }

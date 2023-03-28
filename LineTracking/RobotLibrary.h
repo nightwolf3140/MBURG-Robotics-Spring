@@ -2,9 +2,9 @@ int m = 1; //Motor Vector
 int uTurnValue = 340;
 int vpointTurn = 170; //point turn value
 int speed = 5;
-int turnSpeed = 15*m; //speed times direction (positive/negative)
+int turnSpeed = 15; //speed times direction (positive/negative)
 int lineWidthCM = 1.8; //distance of tape line
-float WheelDiamterCM = 5.6; //Stock ev3
+float WheelDiamterCM = 7.4; //Stock ev3
 int WallDistCM = 8;
 int searchTime = 2;
 
@@ -34,21 +34,6 @@ void uTurn(){
 	setMotorTarget(motorC,-uTurnValue,50);
 }
 
-void leftPointTurn(){
-	rsMotors();
-	setMotorTarget(motorB,-vpointTurn,turnSpeed);
-	setMotorTarget(motorC,vpointTurn,turnSpeed);
-	waitUntilMotorStop(motorC);
-	sleep(200);
-}
-
-void rightPointTurn(){
-	rsMotors();
-	setMotorTarget(motorB,vpointTurn,turnSpeed);
-	setMotorTarget(motorC,-vpointTurn,turnSpeed);
-	waitUntilMotorStop(motorC);
-	sleep(200);
-}
 
 void STP(){ //kinda irelivant with stopAllMotors();
 	rsMotors();
@@ -60,17 +45,40 @@ void STP(){ //kinda irelivant with stopAllMotors();
 	return(encoderCounts / 360.0)*(WheelDiamterCM * PI);
 }*/
 
-float convertCMToDegrees(int CM){ //converts CM imput to wheel degrees
-	return(CM/(WheelDiamterCM*PI)*360);
+/*float convertCMToDegrees(float y){ //converts CM imput to wheel degrees
+	return y/(WheelDiamterCM*PI)*360;
+}*/
+float convertCMToDegrees(float y){ //converts CM imput to wheel degrees
+	return y/(PI*WheelDiamterCM)*360;
 }
 
-void moveCM(int cm){ //move given distance in CM
-	float x;
+void moveCM(float y){ //move given distance in CM
+	//float x=convertCMToDegrees(y);
 	rsMotors();
-	x=convertCMToDegrees(cm);
+	int x = 84;
 	setMotorTarget(motorB, x, speed);
 	setMotorTarget(motorC, x, speed);
-	waitUntilMotorStop(motorB);
+	waitUntilMotorStop(motorC);
+}
+void leftPointTurn(){
+	moveCM(lineWidthCM);
+	sleep(1000);
+	rsMotors();
+	setMotorTarget(motorB,-vpointTurn,turnSpeed);
+	setMotorTarget(motorC,vpointTurn,turnSpeed);
+	waitUntilMotorStop(motorC);
+	sleep(200);
+
+}
+
+void rightPointTurn(){
+	moveCM(lineWidthCM);
+	sleep(1000);
+	rsMotors();
+	setMotorTarget(motorB,vpointTurn,turnSpeed);
+	setMotorTarget(motorC,-vpointTurn,turnSpeed);
+	waitUntilMotorStop(motorC);
+	sleep(200);
 }
 
 void leftNudge(){
@@ -100,17 +108,17 @@ bool checkObstacle(){
 }
 
 void searchRight(){
-	motor[motorB] = -turnSpeed;
-	motor[motorC] = turnSpeed;
-}
-
-void searchLeft(){
 	motor[motorB] = turnSpeed;
 	motor[motorC] = -turnSpeed;
 }
 
+void searchLeft(){
+	motor[motorB] = -turnSpeed;
+	motor[motorC] = turnSpeed;
+}
 
-void findLine(){
+
+/*void findLine(){
 	clearTimer(T1);
 	if((time1[T1] < searchTime) && (getColorName(S2) == colorWhite)){
 		searchRight();
@@ -120,22 +128,20 @@ void findLine(){
 		sleep(200);
 		searchLeft();
 	}
-}
+}*/
 
 void findLeft(){
 	clearTimer(T1);
-	while(getColorName(S2) == colorWhite){
-		STP();
-		sleep(200);
+	STP();
+	while((getColorName(S1) != colorWhite) && (getColorName(S2)== colorWhite)){
 		searchLeft();
 	}
 	STP();
 }
 void findRight(){
 	clearTimer(T1);
-	while(getColorName(S1) == colorWhite){
-		STP();
-		sleep(200);
+	STP();
+	while((getColorName(S1) == colorWhite) && (getColorName(S2) != colorWhite)){
 		searchRight();
 	}
 	STP();
