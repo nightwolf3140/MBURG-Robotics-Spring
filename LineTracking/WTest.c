@@ -54,11 +54,13 @@ void linetracking(){
 		sleep(200);
 	}
 	else if((getColorName(S1) == colorBlack) && (getColorName(S2) != colorBlack)){
-		leftNudge();
+		//leftNudge();
+		findRight();
 	}
 
 	else if((getColorName(S1) != colorBlack) && (getColorName(S2) == colorBlack)){
-		rightNudge();
+		//rightNudge();
+		findRight();
 	}
 
 	if((getColorName(S1) == colorWhite) && (getColorName(S2) == colorWhite)){

@@ -122,6 +122,24 @@ void findLine(){
 	}
 }
 
+void findLeft(){
+	clearTimer(T1);
+	while(getColorName(S2) == colorWhite){
+		STP();
+		sleep(200);
+		searchLeft();
+	}
+	STP();
+}
+void findRight(){
+	clearTimer(T1);
+	while(getColorName(S1) == colorWhite){
+		STP();
+		sleep(200);
+		searchRight();
+	}
+	STP();
+}
 //setproperties
 
 void setUTurn(int x){
