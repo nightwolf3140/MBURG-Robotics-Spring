@@ -97,7 +97,7 @@ void rightNudge(){
 
 bool checkObstacle(){
 	bool wall;
-	if(getUSDistance(S4) > WallDistCM){
+	if(getUSDistance(S4) < WallDistCM){
 		wall = true;
 		return wall;
 	}

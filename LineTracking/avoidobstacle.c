@@ -24,7 +24,7 @@ task display(){//Onboard Debugger system
 		displayCenteredTextLine(1, "Onboard Debugger");
 		displayBigTextLine(3, "LCS: %d", getColorName(leftS)); //left sensor
 		displayBigTextLine(6, "RCS: %d", getColorName(rightS)); //Right sensor
-		displayBigTextLine(8, "USS: %d", getUSDistance(S4)); //Ultrasonic sensor
+		displayBigTextLine(8, "USS: %d", getUSDistance(sonarSensor)); //Ultrasonic sensor
 		displayBigTextLine(10, "B: %d", getMotorEncoder(leftMotor));
 		displayBigTextLine(12, "C %d", getMotorEncoder(rightMotor));
 	}
@@ -36,6 +36,16 @@ void avoidObstacle(){
 	bool wall = checkObstacle();
 	if(wall == true){
 		STP();
+		leftPointTurn();
+		repeat(4){
+			repeat(10){
+				moveCM(1);
+				if ((getColorName(S1)==colorBlack)||(getColorName(S2)==colorBlack)){
+					return;
+				}
+			}
+			rightPointTurn();
+		}
 	}
 }
 
