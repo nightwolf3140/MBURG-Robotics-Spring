@@ -49,13 +49,13 @@ void STP(){ //kinda irelivant with stopAllMotors();
 	return y/(WheelDiamterCM*PI)*360;
 }*/
 float convertCMToDegrees(float y){ //converts CM imput to wheel degrees
-	return y/(PI*WheelDiamterCM)*360;
+	return y/(PI*WheelDiamterCM)*360.0;
 }
 
 void moveCM(float y){ //move given distance in CM
-	//float x=convertCMToDegrees(y);
+	float x=convertCMToDegrees(y);
 	rsMotors();
-	int x = 84;
+	//int x = 84;
 	setMotorTarget(motorB, x, speed);
 	setMotorTarget(motorC, x, speed);
 	waitUntilMotorStop(motorC);
@@ -81,7 +81,7 @@ void rightPointTurn(){
 	sleep(200);
 }
 
-void leftNudge(){
+/*void leftNudge(){
 	STP();
 	rsMotors();
 	setMotorTarget(motorC, 10, 10);
@@ -93,7 +93,7 @@ void rightNudge(){
 	rsMotors();
 	setMotorTarget(motorB, 10, 10);
 	waitUntilMotorStop(motorB);
-}
+}*/
 
 bool checkObstacle(){
 	bool wall;

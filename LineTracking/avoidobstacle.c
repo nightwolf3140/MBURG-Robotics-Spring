@@ -30,39 +30,7 @@ task display(){//Onboard Debugger system
 	}
 }
 
-void linetracking(){
-	if((getColorName(S1) == colorRed) || (getColorName(S2) == colorRed)){
-		STP();
-		playSound(soundBeepBeep);
-	}
-	if((getColorName(S1) == colorGreen) && (getColorName(S2) == colorGreen)){
-		uTurn();
-	}
-	else if ((getColorName(S1)==colorGreen)&&(getColorName(S2)!=colorGreen)){
-		leftPointTurn();
-	}
-	else if ((getColorName(S1)!=colorGreen)&&(getColorName(S2)==colorGreen)){
-		rightPointTurn();
-	}
-	if((getColorName(S1) == colorBlack) && (getColorName(S2) == colorBlack)){
-		moveCM(lineWidthCM);
-		findLeft();
-	}
-	else if((getColorName(S1) == colorBlack) && (getColorName(S2) != colorBlack)){
-		//leftNudge();
-		findLeft();
-	}
 
-	else if((getColorName(S1) != colorBlack) && (getColorName(S2) == colorBlack)){
-		//rightNudge();
-			findRight();
-	}
-
-	if((getColorName(S1) == colorWhite) && (getColorName(S2) == colorWhite)){
-		forwards(6);
-	}
-
-}
 
 void avoidObstacle(){
 	bool wall = checkObstacle();
@@ -93,7 +61,6 @@ task main(){
 	init(); //Config
 	startTask(display);
 	repeat(forever){
-		linetracking();
-		//avoidObstacle();
+		avoidObstacle();
 	}
 }
