@@ -109,11 +109,11 @@ bool checkObstacle(){
 
 void searchRight(){
 	motor[motorB] = turnSpeed;
-	motor[motorC] = turnSpeed/2.0;
+	motor[motorC] = -turnSpeed;
 }
 
 void searchLeft(){
-	motor[motorB] = turnSpeed/2.0;
+	motor[motorB] = -turnSpeed;
 	motor[motorC] = turnSpeed;
 }
 
