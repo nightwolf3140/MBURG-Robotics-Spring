@@ -30,16 +30,29 @@ task display(){//Onboard Debugger system
 	}
 }
 
-
+void moveforward(int x){
+	resetMotorEncoder(motorB);
+	resetMotorEncoder(motorC);
+	setMotorTarget(motorB,x,10);
+	setMotorTarget(motorC,x,10);
+	waitUntilMotorStop(motorC);
+}
 
 void avoidObstacle(){
 	bool wall = checkObstacle();
 	if(wall == true){
 		STP();
 		leftPointTurn();
-		repeat(4){
-			repeat(10){
-				moveCM(1);
+		repeat(7){
+				moveforward(20);
+				if ((getColorName(S1)==colorBlack)||(getColorName(S2)==colorBlack)){
+					return;
+				}
+		}
+		rightPointTurn();
+		repeat(3){
+			repeat(14){
+				moveforward(20);
 				if ((getColorName(S1)==colorBlack)||(getColorName(S2)==colorBlack)){
 					return;
 				}
@@ -53,7 +66,7 @@ void setProperties(){ //change properties here instead of headerfile
 setUTurn(340);
 setSpeed(15);
 setTurnSpeed(10);
-setTurnValue(170);
+setTurnValue(190);
 setWheelDiamter(7.4);
 setWallDist(8); //Units in CM
 }
