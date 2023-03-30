@@ -2,7 +2,7 @@ int m = 1; //Motor Vector
 int uTurnValue = 340;
 int vpointTurn = 170; //point turn value
 int speed = 5;
-int turnSpeed = 15;//speed times direction (positive/negative)
+float turnSpeed = 15;//speed times direction (positive/negative)
 int lineWidthCM = 1.8; //distance of tape line
 float WheelDiamterCM = 7.4; //Stock ev3
 int WallDistCM = 8;
@@ -109,11 +109,11 @@ bool checkObstacle(){
 
 void searchRight(){
 	motor[motorB] = turnSpeed;
-	motor[motorC] = -turnSpeed;
+	motor[motorC] = turnSpeed/2.0;
 }
 
 void searchLeft(){
-	motor[motorB] = -turnSpeed;
+	motor[motorB] = turnSpeed/2.0;
 	motor[motorC] = turnSpeed;
 }
 
