@@ -23,7 +23,6 @@ void rsMotors(){
 }*/
 void forwards(int x){ //controled speed
 	rsMotors();
-	//setMultipleMotors(x, motorB, motorC);
 	motor[motorB] = x;
 	motor[motorC] = x;
 }
@@ -120,7 +119,7 @@ void searchLeft(){
 
 /*void findLine(){
 	clearTimer(T1);
-	if((time1[T1] < searchTime) && (getColorName(S2) == colorWhite)){
+	if((time1[T1] < searchTime) && (getColorName(S4) == colorWhite)){
 		searchRight();
 	}
 	else if ((time1[T1] < searchTime) && (getColorName(S1) == colorWhite)){
@@ -133,7 +132,7 @@ void searchLeft(){
 void findLeft(){
 	clearTimer(T1);
 	STP();
-	while((getColorName(S1) != colorWhite) && (getColorName(S2)== colorWhite)){
+	while((getColorName(S1) != colorWhite) && (getColorName(S4)== colorWhite)){
 		searchLeft();
 	}
 	STP();
@@ -141,7 +140,7 @@ void findLeft(){
 void findRight(){
 	clearTimer(T1);
 	STP();
-	while((getColorName(S1) == colorWhite) && (getColorName(S2) != colorWhite)){
+	while((getColorName(S1) == colorWhite) && (getColorName(S4) != colorWhite)){
 		searchRight();
 	}
 	STP();
