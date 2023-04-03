@@ -44,8 +44,9 @@ void linetracking(){
 		rightPointTurn();
 	}
 	if((getColorName(S1) == colorBlack) && (getColorName(S4) == colorBlack)){
-		moveCM(lineWidthCM);
-		findLeft();
+		playSound(soundBeepBeep);
+		//moveCM(lineWidthCM);
+		//findLeft();
 	}
 	else if((getColorName(S1) == colorBlack) && (getColorName(S4) != colorBlack)){
 		//leftNudge();
@@ -72,7 +73,7 @@ void avoidObstacle(){
 
 void setProperties(){ //change properties here instead of headerfile
 setUTurn(340);
-setSpeed(10);
+setSpeed(15);
 setTurnSpeed(10);
 setTurnValue(170);
 setWheelDiamter(7.4);

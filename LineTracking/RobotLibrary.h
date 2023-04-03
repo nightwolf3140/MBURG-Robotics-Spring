@@ -2,8 +2,8 @@ int m = 1; //Motor Vector
 int uTurnValue = 340;
 int vpointTurn = 170; //point turn value
 int speed = 5;
-float turnSpeed = 15;//speed times direction (positive/negative)
-int lineWidthCM = 1.8; //distance of tape line
+float turnSpeed = 10;//speed times direction (positive/negative)
+float lineWidthCM = 4.0; //distance of tape line
 float WheelDiamterCM = 7.4; //Stock ev3
 int WallDistCM = 8;
 int searchTime = 2;
@@ -132,18 +132,27 @@ void searchLeft(){
 void findLeft(){
 	clearTimer(T1);
 	STP();
-	while((getColorName(S1) != colorWhite) && (getColorName(S4)== colorWhite)){
+	while((getColorName(S1) == colorBlack) && (getColorName(S4)== colorWhite)){
 		searchLeft();
 	}
-	STP();
+	if((getColorName(S1) == colorWhite) && (getColorName(S4) == colorBlack)){
+		STP();
+		sleep(500);
+		moveCM(-3.0);
+		sleep(500);
+	}
 }
 void findRight(){
 	clearTimer(T1);
 	STP();
-	while((getColorName(S1) == colorWhite) && (getColorName(S4) != colorWhite)){
+	while((getColorName(S1) == colorWhite) && (getColorName(S4) == colorBlack)){
 		searchRight();
 	}
-	STP();
+	if((getColorName(S1) == colorBlack) && (getColorName(S4) == colorWhite)){
+		sleep(500);
+		moveCM(-3.0);
+		sleep(500);
+	}
 }
 //setproperties
 
