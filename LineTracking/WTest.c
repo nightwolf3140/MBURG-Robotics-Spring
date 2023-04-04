@@ -59,7 +59,7 @@ void linetracking(){
 	}
 
 	if((getColorName(S1) == colorWhite) && (getColorName(S4) == colorWhite)){
-		forwards(6);
+		forwards();
 	}
 
 }
@@ -72,13 +72,13 @@ void avoidObstacle(){
 }
 
 void setProperties(){ //change properties here instead of headerfile
-setUTurn(340);
-setSpeed(20);
+setUTurn(435);
+setSpeed(15);
 setTurnSpeed(13);
-setTurnValue(170);
+setTurnValue(180);
 setWheelDiamter(7.4);
 setWallDist(8); //Units in CM
-setLineWidthCM(4.0)//make sure to use float values
+setLineWidthCM(4.0);//make sure to use float values
 }
 
 void init(){ //First line of code to run

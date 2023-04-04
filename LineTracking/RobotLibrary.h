@@ -6,7 +6,7 @@ float turnSpeed = 10;//speed times direction (positive/negative)
 float lineWidthCM = 4.0; //distance of tape line
 float WheelDiamterCM = 7.4; //Stock ev3
 int WallDistCM = 8;
-int searchTime = 2;
+//int searchTime = 2;
 
 
 //throw functions below
@@ -15,12 +15,11 @@ void rsMotors(){
 	resetMotorEncoder(motorC);
 }
 
-/*void forwards(){ //default
-	rsMotors();
+void forwards(){ //default
 	//setMultipleMotors(speed, motorB, motorC);
 	motor[motorB] = speed;
 	motor[motorC] = speed;
-}*/
+}
 void forwards(int x){ //controled speed
 	motor[motorB] = x;
 	motor[motorC] = x;
@@ -65,6 +64,7 @@ void leftPointTurn(){
 	setMotorTarget(motorC,vpointTurn,turnSpeed);
 	waitUntilMotorStop(motorC);
 	sleep(200);
+	moveCM(2.5);
 
 }
 
@@ -76,9 +76,10 @@ void rightPointTurn(){
 	setMotorTarget(motorC,-vpointTurn,turnSpeed);
 	waitUntilMotorStop(motorC);
 	sleep(200);
+	moveCM(2.5);
 }
 
-/*void leftNudge(){
+void leftNudge(){
 	STP();
 	rsMotors();
 	setMotorTarget(motorC, 10, 10);
@@ -90,7 +91,7 @@ void rightNudge(){
 	rsMotors();
 	setMotorTarget(motorB, 10, 10);
 	waitUntilMotorStop(motorB);
-}*/
+}
 
 bool checkObstacle(){
 	bool wall;
