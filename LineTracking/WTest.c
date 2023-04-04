@@ -73,8 +73,8 @@ void avoidObstacle(){
 
 void setProperties(){ //change properties here instead of headerfile
 setUTurn(340);
-setSpeed(15);
-setTurnSpeed(10);
+setSpeed(20);
+setTurnSpeed(13);
 setTurnValue(170);
 setWheelDiamter(7.4);
 setWallDist(8); //Units in CM
