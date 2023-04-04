@@ -2,9 +2,9 @@ int m = 1; //Motor Vector
 int uTurnValue = 340;
 int vpointTurn = 170; //point turn value
 int speed = 5;
-int turnSpeed = 15*m; //speed times direction (positive/negative)
-int lineWidthCM = 1.8; //distance of tape line
-float WheelDiamterCM = 5.6; //Stock ev3
+float turnSpeed = 10;//speed times direction (positive/negative)
+float lineWidthCM = 4.0; //distance of tape line
+float WheelDiamterCM = 7.4; //Stock ev3
 int WallDistCM = 8;
 int searchTime = 2;
 
@@ -22,8 +22,6 @@ void rsMotors(){
 	motor[motorC] = speed;
 }*/
 void forwards(int x){ //controled speed
-	rsMotors();
-	//setMultipleMotors(x, motorB, motorC);
 	motor[motorB] = x;
 	motor[motorC] = x;
 }
@@ -34,21 +32,6 @@ void uTurn(){
 	setMotorTarget(motorC,-uTurnValue,50);
 }
 
-void leftPointTurn(){
-	rsMotors();
-	setMotorTarget(motorB,-vpointTurn,turnSpeed);
-	setMotorTarget(motorC,vpointTurn,turnSpeed);
-	waitUntilMotorStop(motorC);
-	sleep(200);
-}
-
-void rightPointTurn(){
-	rsMotors();
-	setMotorTarget(motorB,vpointTurn,turnSpeed);
-	setMotorTarget(motorC,-vpointTurn,turnSpeed);
-	waitUntilMotorStop(motorC);
-	sleep(200);
-}
 
 void STP(){ //kinda irelivant with stopAllMotors();
 	rsMotors();
@@ -60,20 +43,42 @@ void STP(){ //kinda irelivant with stopAllMotors();
 	return(encoderCounts / 360.0)*(WheelDiamterCM * PI);
 }*/
 
-float convertCMToDegrees(int CM){ //converts CM imput to wheel degrees
-	return(CM/(WheelDiamterCM*PI)*360);
+/*float convertCMToDegrees(float y){ //converts CM imput to wheel degrees
+	return y/(WheelDiamterCM*PI)*360;
+}*/
+float convertCMToDegrees(float y){ //converts CM imput to wheel degrees
+	return y/(PI*WheelDiamterCM)*360.0;
 }
 
-void moveCM(int cm){ //move given distance in CM
-	float x;
+void moveCM(float y){ //move given distance in CM
+	float x=convertCMToDegrees(y);
 	rsMotors();
-	x=convertCMToDegrees(cm);
 	setMotorTarget(motorB, x, speed);
 	setMotorTarget(motorC, x, speed);
-	waitUntilMotorStop(motorB);
+	waitUntilMotorStop(motorC);
+}
+void leftPointTurn(){
+	moveCM(lineWidthCM);
+	sleep(1000);
+	rsMotors();
+	setMotorTarget(motorB,-vpointTurn,turnSpeed);
+	setMotorTarget(motorC,vpointTurn,turnSpeed);
+	waitUntilMotorStop(motorC);
+	sleep(200);
+
 }
 
-void leftNudge(){
+void rightPointTurn(){
+	moveCM(lineWidthCM);
+	sleep(1000);
+	rsMotors();
+	setMotorTarget(motorB,vpointTurn,turnSpeed);
+	setMotorTarget(motorC,-vpointTurn,turnSpeed);
+	waitUntilMotorStop(motorC);
+	sleep(200);
+}
+
+/*void leftNudge(){
 	STP();
 	rsMotors();
 	setMotorTarget(motorC, 10, 10);
@@ -85,13 +90,13 @@ void rightNudge(){
 	rsMotors();
 	setMotorTarget(motorB, 10, 10);
 	waitUntilMotorStop(motorB);
-}
+}*/
 
 bool checkObstacle(){
 	bool wall;
-	if(getUSDistance(S4) > WallDistCM){
+	if(getUSDistance(S3) < WallDistCM){
 		wall = true;
-		return wall;
+		return wall;//incredible
 	}
 	else{
 		wall = false;
@@ -100,19 +105,19 @@ bool checkObstacle(){
 }
 
 void searchRight(){
-	motor[motorB] = -turnSpeed;
-	motor[motorC] = turnSpeed;
-}
-
-void searchLeft(){
 	motor[motorB] = turnSpeed;
 	motor[motorC] = -turnSpeed;
 }
 
+void searchLeft(){
+	motor[motorB] = -turnSpeed;
+	motor[motorC] = turnSpeed;
+}
 
-void findLine(){
+
+/*void findLine(){
 	clearTimer(T1);
-	if((time1[T1] < searchTime) && (getColorName(S2) == colorWhite)){
+	if((time1[T1] < searchTime) && (getColorName(S4) == colorWhite)){
 		searchRight();
 	}
 	else if ((time1[T1] < searchTime) && (getColorName(S1) == colorWhite)){
@@ -120,8 +125,33 @@ void findLine(){
 		sleep(200);
 		searchLeft();
 	}
-}
+}*/
 
+void findLeft(){
+	clearTimer(T1);
+	STP();
+	while((getColorName(S1) == colorBlack) && (getColorName(S4)== colorWhite)){
+		searchLeft();
+	}
+	if((getColorName(S1) == colorWhite) && (getColorName(S4) == colorBlack)){
+		STP();
+		sleep(500);
+		moveCM(-3.0);
+		sleep(500);
+	}
+}
+void findRight(){
+	clearTimer(T1);
+	STP();
+	while((getColorName(S1) == colorWhite) && (getColorName(S4) == colorBlack)){
+		searchRight();
+	}
+	if((getColorName(S1) == colorBlack) && (getColorName(S4) == colorWhite)){
+		sleep(500);
+		moveCM(-3.0);
+		sleep(500);
+	}
+}
 //setproperties
 
 void setUTurn(int x){
@@ -146,4 +176,8 @@ void setWheelDiamter(float x){
 
 void setWallDist(float x){
 	WallDistCM=x;
+}
+
+void setLineWidthCM(float x){
+	x=lineWidthCM;
 }

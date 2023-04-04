@@ -1,6 +1,7 @@
 #pragma config(Sensor, S1,     leftS,          sensorEV3_Color, modeEV3Color_Color)
-#pragma config(Sensor, S3,     reflect,        sensorEV3_Ultrasonic)
-#pragma config(Sensor, S4,     rightS,         sensorEV3_Color, modeEV3Color_Color)
+#pragma config(Sensor, S2,     rightS,         sensorEV3_Color, modeEV3Color_Color)
+#pragma config(Sensor, S3,     reflect,        sensorEV3_Color)
+#pragma config(Sensor, S4,     sonarSensor,    sensorEV3_Ultrasonic)
 #pragma config(Motor,  motorA,          armMotor,      tmotorEV3_Medium, PIDControl, encoder)
 #pragma config(Motor,  motorB,          leftMotor,     tmotorEV3_Large, PIDControl, driveLeft, encoder)
 #pragma config(Motor,  motorC,          rightMotor,    tmotorEV3_Large, PIDControl, driveRight, encoder)
@@ -23,62 +24,51 @@ task display(){//Onboard Debugger system
 		displayCenteredTextLine(1, "Onboard Debugger");
 		displayBigTextLine(3, "LCS: %d", getColorName(leftS)); //left sensor
 		displayBigTextLine(6, "RCS: %d", getColorName(rightS)); //Right sensor
-		displayBigTextLine(8, "USS: %d", getUSDistance(S3)); //Ultrasonic sensor
+		displayBigTextLine(8, "USS: %d", getUSDistance(sonarSensor)); //Ultrasonic sensor
 		displayBigTextLine(10, "B: %d", getMotorEncoder(leftMotor));
 		displayBigTextLine(12, "C %d", getMotorEncoder(rightMotor));
 	}
 }
 
-void linetracking(){
-	if((getColorName(S1) == colorRed) || (getColorName(S4) == colorRed)){
-		STP();
-		playSound(soundBeepBeep);
-	}
-	if((getColorName(S1) == colorGreen) && (getColorName(S4) == colorGreen)){
-		uTurn();
-	}
-	else if ((getColorName(S1)==colorGreen)&&(getColorName(S4)!=colorGreen)){
-		leftPointTurn();
-	}
-	else if ((getColorName(S1)!=colorGreen)&&(getColorName(S4)==colorGreen)){
-		rightPointTurn();
-	}
-	if((getColorName(S1) == colorBlack) && (getColorName(S4) == colorBlack)){
-		playSound(soundBeepBeep);
-		//moveCM(lineWidthCM);
-		//findLeft();
-	}
-	else if((getColorName(S1) == colorBlack) && (getColorName(S4) != colorBlack)){
-		//leftNudge();
-		findLeft();
-	}
-
-	else if((getColorName(S1) != colorBlack) && (getColorName(S4) == colorBlack)){
-		//rightNudge();
-			findRight();
-	}
-
-	if((getColorName(S1) == colorWhite) && (getColorName(S4) == colorWhite)){
-		forwards(6);
-	}
-
+void moveforward(int x){
+	resetMotorEncoder(motorB);
+	resetMotorEncoder(motorC);
+	setMotorTarget(motorB,x,10);
+	setMotorTarget(motorC,x,10);
+	waitUntilMotorStop(motorC);
 }
 
 void avoidObstacle(){
 	bool wall = checkObstacle();
 	if(wall == true){
 		STP();
+		leftPointTurn();
+		repeat(7){
+				moveforward(20);
+				if ((getColorName(S1)==colorBlack)||(getColorName(S2)==colorBlack)){
+					return;
+				}
+		}
+		rightPointTurn();
+		repeat(3){
+			repeat(14){
+				moveforward(20);
+				if ((getColorName(S1)==colorBlack)||(getColorName(S2)==colorBlack)){
+					return;
+				}
+			}
+			rightPointTurn();
+		}
 	}
 }
 
 void setProperties(){ //change properties here instead of headerfile
 setUTurn(340);
-setSpeed(20);
-setTurnSpeed(13);
-setTurnValue(170);
+setSpeed(15);
+setTurnSpeed(10);
+setTurnValue(190);
 setWheelDiamter(7.4);
 setWallDist(8); //Units in CM
-setLineWidthCM(4.0)//make sure to use float values
 }
 
 void init(){ //First line of code to run
@@ -94,7 +84,6 @@ task main(){
 	init(); //Config
 	startTask(display);
 	repeat(forever){
-		linetracking();
-		//avoidObstacle();
+		avoidObstacle();
 	}
 }
