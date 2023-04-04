@@ -78,6 +78,7 @@ setTurnSpeed(10);
 setTurnValue(170);
 setWheelDiamter(7.4);
 setWallDist(8); //Units in CM
+setLineWidthCM(4.0)//make sure to use float values
 }
 
 void init(){ //First line of code to run

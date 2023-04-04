@@ -22,7 +22,6 @@ void rsMotors(){
 	motor[motorC] = speed;
 }*/
 void forwards(int x){ //controled speed
-	rsMotors();
 	motor[motorB] = x;
 	motor[motorC] = x;
 }
@@ -54,7 +53,6 @@ float convertCMToDegrees(float y){ //converts CM imput to wheel degrees
 void moveCM(float y){ //move given distance in CM
 	float x=convertCMToDegrees(y);
 	rsMotors();
-	//int x = 84;
 	setMotorTarget(motorB, x, speed);
 	setMotorTarget(motorC, x, speed);
 	waitUntilMotorStop(motorC);
@@ -98,7 +96,7 @@ bool checkObstacle(){
 	bool wall;
 	if(getUSDistance(S3) < WallDistCM){
 		wall = true;
-		return wall;
+		return wall;//incredible
 	}
 	else{
 		wall = false;
@@ -178,4 +176,8 @@ void setWheelDiamter(float x){
 
 void setWallDist(float x){
 	WallDistCM=x;
+}
+
+void setLineWidthCM(float x){
+	x=lineWidthCM;
 }
