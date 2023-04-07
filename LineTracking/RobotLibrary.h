@@ -1,6 +1,6 @@
 int m = 1; //Motor Vector
-int uTurnValue = 340;
-int vpointTurn = 170; //point turn value
+int uTurnValue = 500;
+int vpointTurn = 200; //point turn value
 int speed = 5;
 float turnSpeed = 10;//speed times direction (positive/negative)
 float lineWidthCM = 4.0; //distance of tape line
@@ -27,8 +27,9 @@ void forwards(int x){ //controled speed
 
 void uTurn(){
 	rsMotors();
-	setMotorTarget(motorB,uTurnValue,50);
-	setMotorTarget(motorC,-uTurnValue,50);
+	setMotorTarget(motorB,uTurnValue,turnSpeed);
+	setMotorTarget(motorC,-uTurnValue,turnSpeed);
+	waitUntilMotorStop(motorC);
 }
 
 

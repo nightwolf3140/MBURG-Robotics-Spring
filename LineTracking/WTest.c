@@ -35,14 +35,20 @@ void linetracking(){
 		playSound(soundBeepBeep);
 	}
 	if((getColorName(S1) == colorGreen) || (getColorName(S4) == colorGreen)){
+		STP();
+		sleep(2000);
 		if((getColorName(S1) == colorGreen) && (getColorName(S4) == colorGreen)){
 			uTurn();
+			sleep(200);
+			moveCM(1);
 		}
 		else if ((getColorName(S1)==colorGreen)&&(getColorName(S4)!=colorGreen)){
 			leftPointTurn();
+			sleep(200);
 		}
 		else if ((getColorName(S1)!=colorGreen)&&(getColorName(S4)==colorGreen)){
 			rightPointTurn();
+			sleep(200);
 		}
 	}
 	if((getColorName(S1) == colorBlack) || (getColorName(S4) == colorBlack)){
@@ -82,7 +88,7 @@ void setProperties(){ //change properties here instead of headerfile
 setUTurn(435);
 setSpeed(15);
 setTurnSpeed(13);
-setTurnValue(180);
+setTurnValue(200);
 setWheelDiamter(7.4);
 setWallDist(8); //Units in CM
 setLineWidthCM(4.0);//make sure to use float values
