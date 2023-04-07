@@ -48,9 +48,8 @@ void linetracking(){
 	if((getColorName(S1) == colorBlack) || (getColorName(S4) == colorBlack)){
 
 		if((getColorName(S1) == colorBlack) && (getColorName(S4) == colorBlack)){
-			playSound(soundBeepBeep);
-			//moveCM(lineWidthCM);
-			//findLeft();
+			moveCM(2.0);
+			findLine();
 		}
 		else if((getColorName(S1) == colorBlack) && (getColorName(S4) != colorBlack)){
 			//leftNudge();

@@ -6,7 +6,7 @@ float turnSpeed = 10;//speed times direction (positive/negative)
 float lineWidthCM = 4.0; //distance of tape line
 float WheelDiamterCM = 7.4; //Stock ev3
 int WallDistCM = 8;
-//int searchTime = 2;
+int searchTime = 2;
 
 
 //throw functions below
@@ -38,9 +38,9 @@ void STP(){ //kinda irelivant with stopAllMotors();
 	motor[motorC] = 0;
 }
 
-/*float convertEncoderToCM(int encoderCounts){
+float convertEncoderToCM(int encoderCounts){
 	return(encoderCounts / 360.0)*(WheelDiamterCM * PI);
-}*/
+}
 
 /*float convertCMToDegrees(float y){ //converts CM imput to wheel degrees
 	return y/(WheelDiamterCM*PI)*360;
@@ -116,7 +116,7 @@ void searchLeft(){
 }
 
 
-/*void findLine(){
+void findLine(){
 	clearTimer(T1);
 	if((time1[T1] < searchTime) && (getColorName(S4) == colorWhite)){
 		searchRight();
@@ -126,7 +126,7 @@ void searchLeft(){
 		sleep(200);
 		searchLeft();
 	}
-}*/
+}
 
 void findLeft(){
 	clearTimer(T1);
