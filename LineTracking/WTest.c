@@ -34,32 +34,40 @@ void linetracking(){
 		STP();
 		playSound(soundBeepBeep);
 	}
-	if((getColorName(S1) == colorGreen) && (getColorName(S4) == colorGreen)){
-		uTurn();
+	if((getColorName(S1) == colorGreen) || (getColorName(S4) == colorGreen)){
+		if((getColorName(S1) == colorGreen) && (getColorName(S4) == colorGreen)){
+			uTurn();
+		}
+		else if ((getColorName(S1)==colorGreen)&&(getColorName(S4)!=colorGreen)){
+			leftPointTurn();
+		}
+		else if ((getColorName(S1)!=colorGreen)&&(getColorName(S4)==colorGreen)){
+			rightPointTurn();
+		}
 	}
-	else if ((getColorName(S1)==colorGreen)&&(getColorName(S4)!=colorGreen)){
-		leftPointTurn();
-	}
-	else if ((getColorName(S1)!=colorGreen)&&(getColorName(S4)==colorGreen)){
-		rightPointTurn();
-	}
-	if((getColorName(S1) == colorBlack) && (getColorName(S4) == colorBlack)){
-		playSound(soundBeepBeep);
-		//moveCM(lineWidthCM);
-		//findLeft();
-	}
-	else if((getColorName(S1) == colorBlack) && (getColorName(S4) != colorBlack)){
-		//leftNudge();
-		findLeft();
-	}
+	if((getColorName(S1) == colorBlack) || (getColorName(S4) == colorBlack)){
 
-	else if((getColorName(S1) != colorBlack) && (getColorName(S4) == colorBlack)){
-		//rightNudge();
+		if((getColorName(S1) == colorBlack) && (getColorName(S4) == colorBlack)){
+			playSound(soundBeepBeep);
+			//moveCM(lineWidthCM);
+			//findLeft();
+		}
+		else if((getColorName(S1) == colorBlack) && (getColorName(S4) != colorBlack)){
+			//leftNudge();
+			findLeft();
+		}
+
+		else if((getColorName(S1) != colorBlack) && (getColorName(S4) == colorBlack)){
+			//rightNudge();
 			findRight();
+		}
 	}
 
 	if((getColorName(S1) == colorWhite) && (getColorName(S4) == colorWhite)){
 		forwards();
+	}
+	else{
+		playSound(soundException); //Means color sensor tripping out
 	}
 
 }
@@ -79,6 +87,7 @@ setTurnValue(180);
 setWheelDiamter(7.4);
 setWallDist(8); //Units in CM
 setLineWidthCM(4.0);//make sure to use float values
+coasting(false);//autobraking
 }
 
 void init(){ //First line of code to run

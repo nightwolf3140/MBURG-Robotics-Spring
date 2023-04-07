@@ -182,3 +182,12 @@ void setWallDist(float x){
 void setLineWidthCM(float x){
 	x=lineWidthCM;
 }
+
+void coasting(bool coast){
+	if(coast == false){
+		bFloatDuringInactiveMotorPWM=true;
+	}
+	else if(coast == true){
+		bFloatDuringInactiveMotorPWM=false;
+	}
+}
