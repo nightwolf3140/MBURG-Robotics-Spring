@@ -25,7 +25,7 @@ task display(){//Onboard Debugger system
 		displayBigTextLine(6, "RCS: %d", getColorName(rightS)); //Right sensor
 		displayBigTextLine(8, "USS: %d", getUSDistance(S3)); //Ultrasonic sensor
 		displayBigTextLine(10, "B: %d", getMotorEncoder(leftMotor));
-		displayBigTextLine(12, "C %d", getMotorEncoder(rightMotor));
+		displayBigTextLine(12, "C: %d", getMotorEncoder(rightMotor));
 	}
 }
 
@@ -72,18 +72,18 @@ void linetracking(){
 		forwards();
 	}
 	else{
-		playSound(soundException); //Means color sensor tripping out
+		//playSound(soundException); //Means color sensor tripping out
 	}
 
 }
 
-void avoidObstacle(){
+/*void avoidObstacle(){
 	bool wall = checkObstacle();
 	if(wall == true){
 		STP();
 	}
 }
-
+*/ //To be replaced by avoidobstacle.c
 void setProperties(){ //change properties here instead of headerfile
 setUTurn(435);
 setSpeed(15);
@@ -99,9 +99,14 @@ void init(){ //First line of code to run
 clearSounds();
 clearTimer(T1);
 eraseDisplay();
+startTask(initDis);
+homeArm();
 rsMotors();
 bFloatDuringInactiveMotorPWM=false; //Motor coasting
 setProperties(); //config settings
+sleep(2000);
+stopTask(initDis);
+eraseDisplay();
 }
 
 task main(){

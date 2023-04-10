@@ -154,8 +154,27 @@ void findRight(){
 		sleep(500);
 	}
 }
+
+void homeArm(){
+	motor[motorA] = 10;
+	sleep(2000);
+	motor[motorA] = 0;
+	resetMotorEncoder(motorA);
+}
 //setproperties
 
+task initDis(){//Initialize display(){
+	int time = 4;
+	repeat(3){
+		time=time-1;
+		displayCenteredBigTextLine(2, "Initializing: %d", time);
+		displayCenteredBigTextLine(6, "Team Eclipse:");
+		displayCenteredBigTextLine(8, "William S");
+		displayCenteredBigTextLine(10, "Fredrick Wu");
+		displayCenteredBigTextLine(12, "Justin Oh");
+		sleep(1000);
+	}
+}
 void setUTurn(int x){
 	uTurnValue=x;
 }
