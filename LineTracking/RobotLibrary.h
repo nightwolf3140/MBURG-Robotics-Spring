@@ -132,27 +132,30 @@ void findLine(){
 void findLeft(){
 	clearTimer(T1);
 	STP();
-	while((getColorName(S1) == colorBlack) && (getColorName(S4)== colorWhite)){
+	while ((getColorName(S1)==colorBlack)&&(getColorName(S4)!= colorBlack)){
 		searchLeft();
 	}
-	if((getColorName(S1) == colorWhite) && (getColorName(S4) == colorBlack)){
-		STP();
-		sleep(500);
-		moveCM(-3.0);
-		sleep(500);
+	if ((getColorName(S1)==colorBlack)&&(getColorName(S4)==colorBlack)){
+		while(getColorName(S4)!= colorBlack){
+			searchLeft();
+		}
+		moveCM(1.0);
 	}
+	sleep(500);
 }
 void findRight(){
 	clearTimer(T1);
 	STP();
-	while((getColorName(S1) == colorWhite) && (getColorName(S4) == colorBlack)){
+	while ((getColorName(S1)!=colorBlack)&&(getColorName(S4)==colorBlack)){
 		searchRight();
 	}
-	if((getColorName(S1) == colorBlack) && (getColorName(S4) == colorWhite)){
-		sleep(500);
-		moveCM(-3.0);
-		sleep(500);
+	if ((getColorName(S1)==colorBlack)&&(getColorName(S4)==colorBlack)){
+		while(getColorName(S1) != colorBlack){
+			searchRight();
+		}
+		moveCM(1.0);
 	}
+	sleep(500);
 }
 //setproperties
 
