@@ -33,9 +33,11 @@ void linetracking(){
 	if((getColorName(S1) == colorRed) || (getColorName(S4) == colorRed)){
 		STP();
 		playSound(soundBeepBeep);
+		setLEDColor(ledRedPulse);
 	}
 	if((getColorName(S1) == colorGreen) || (getColorName(S4) == colorGreen)){
 		STP();
+		setLEDColor(ledGreen);
 		sleep(2000);
 		if((getColorName(S1) == colorGreen) && (getColorName(S4) == colorGreen)){
 			uTurn();
@@ -52,11 +54,11 @@ void linetracking(){
 		}
 	}
 	if((getColorName(S1) == colorBlack) || (getColorName(S4) == colorBlack)){
-
+		STP();
+		sleep(200);
 		if((getColorName(S1) == colorBlack) && (getColorName(S4) == colorBlack)){
-			/*findLine();
-			moveCM(5.0);
-			*/
+			STP();
+			findLine();
 		}
 		else if((getColorName(S1) == colorBlack) && (getColorName(S4) != colorBlack)){
 			//leftNudge();
@@ -72,10 +74,12 @@ void linetracking(){
 	}
 
 	if((getColorName(S1) == colorWhite) && (getColorName(S4) == colorWhite)){
+		setLEDColor(ledGreenPulse);
 		forwards();
 	}
 	else{
 		//playSound(soundException); //Means color sensor tripping out
+		setLEDColor(ledRed);
 	}
 
 }
@@ -90,11 +94,12 @@ void linetracking(){
 void setProperties(){ //change properties here instead of headerfile
 setUTurn(435);
 setSpeed(15);
-setTurnSpeed(13);
+setTurnSpeed(10);
 setTurnValue(200);
 setWheelDiamter(7.4);
 setWallDist(8); //Units in CM
 setLineWidthCM(4.0);//make sure to use float values
+setSearchTime(6.0);
 coasting(false);//autobraking
 }
 
@@ -102,21 +107,22 @@ void init(){ //First line of code to run
 clearSounds();
 clearTimer(T1);
 eraseDisplay();
-startTask(initDis);
-homeArm();
+startTask(initDis);//Boot Screen
+homeArm();//Moves arm all the way up
 rsMotors();
 bFloatDuringInactiveMotorPWM=false; //Motor coasting
 setProperties(); //config settings
 sleep(2000);
-stopTask(initDis);
+stopTask(initDis);//Boot screen
 eraseDisplay();
+startTask(display);//Starts debugger screen
 }
 
 task main(){
 	init(); //Config
-	startTask(display);
+	findLine();
 	repeat(forever){
-		linetracking();
+		//linetracking();
 		//avoidObstacle();
 	}
 }

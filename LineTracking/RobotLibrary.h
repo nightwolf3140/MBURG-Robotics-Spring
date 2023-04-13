@@ -6,7 +6,7 @@ float turnSpeed = 10;//speed times direction (positive/negative)
 float lineWidthCM = 4.0; //distance of tape line
 float WheelDiamterCM = 7.4; //Stock ev3
 int WallDistCM = 8;
-int searchTime = 2;
+float searchTime = 2;
 
 
 //throw functions below
@@ -118,21 +118,21 @@ void searchLeft(){
 
 
 void findLine(){
-	moveCM(5.0);
+	playTone(500, 30);
+	moveCM(3.0);
 	sleep(200);
 	clearTimer(T1);
-	if((time1[T1] < searchTime) && (getColorName(S4) == colorWhite)){
+	if((time1[T1] < searchTime) && (getColorName(S4) != colorBlack)){
+		playSound(soundException);
 		searchRight();
 	}
-	else if ((time1[T1] < searchTime) && (getColorName(S1) == colorWhite)){
-		STP();
-		sleep(200);
+	else if((time1[T1] > searchTime) && (getColorName(S4) == colorWhite)){
 		searchLeft();
 	}
+	STP();
 }
 
 void findLeft(){
-	clearTimer(T1);
 	STP();
 	while ((getColorName(S1)==colorBlack)&&(getColorName(S4)!= colorBlack)){
 		searchLeft();
@@ -146,7 +146,6 @@ void findLeft(){
 	sleep(500);
 }
 void findRight(){
-	clearTimer(T1);
 	STP();
 	while ((getColorName(S1)!=colorBlack)&&(getColorName(S4)==colorBlack)){
 		searchRight();
@@ -205,7 +204,11 @@ void setWallDist(float x){
 }
 
 void setLineWidthCM(float x){
-	x=lineWidthCM;
+	lineWidthCM=x;
+}
+
+void setSearchTime(float x){
+	searchTime=x;
 }
 
 void coasting(bool coast){
