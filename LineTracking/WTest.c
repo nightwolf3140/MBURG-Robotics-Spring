@@ -122,7 +122,7 @@ task main(){
 	init(); //Config
 	findLine();
 	repeat(forever){
-		//linetracking();
+		linetracking();
 		//avoidObstacle();
 	}
 }

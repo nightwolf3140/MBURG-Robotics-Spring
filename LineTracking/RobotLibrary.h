@@ -122,11 +122,11 @@ void findLine(){
 	moveCM(3.0);
 	sleep(200);
 	clearTimer(T1);
-	if((time1[T1] < searchTime) && (getColorName(S4) != colorBlack)){
+	while((time1[T1] < searchTime) && (getColorName(S4) != colorBlack)){
 		playSound(soundException);
 		searchRight();
 	}
-	else if((time1[T1] > searchTime) && (getColorName(S4) == colorWhite)){
+	while((time1[T1] > searchTime) && (getColorName(S4) == colorWhite)){
 		searchLeft();
 	}
 	STP();
