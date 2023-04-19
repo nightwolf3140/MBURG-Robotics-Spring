@@ -126,7 +126,7 @@ void findLine(){
 		playSound(soundException);
 		searchRight();
 	}
-	while((time1[T1] > searchTime) && (getColorName(S1) == colorBlack)){
+	while((time1[T1] > searchTime) && (getColorName(S1) != colorBlack)){
 		searchLeft();
 	}
 	STP();
