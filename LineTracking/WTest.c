@@ -120,7 +120,6 @@ startTask(display);//Starts debugger screen
 
 task main(){
 	init(); //Config
-	findLine();
 	repeat(forever){
 		linetracking();
 		//avoidObstacle();
