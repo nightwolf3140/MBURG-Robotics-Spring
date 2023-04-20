@@ -117,19 +117,22 @@ void searchLeft(){
 }
 
 
-void findLine(){
-	playTone(500, 30);
-	moveCM(3.0);
-	sleep(200);
-	clearTimer(T1);
-	while((time1[T1] < searchTime) && (getColorName(S4) != colorBlack)){
+void findLine(bool hold){
+	while(hold == true){
+		STP();
 		playSound(soundException);
-		searchRight();
+		moveCM(lineWidthCM);
+		sleep(1000);
+		clearTimer(T1);
+		while((time1[T1] < searchTime) && (getColorName(S4) != colorBlack)){
+			searchRight();
+		}
+		while((time1[T1] > searchTime) && (getColorName(S1) != colorBlack)){
+			searchLeft();
+		}
+		STP();
+		hold=false;
 	}
-	while((time1[T1] > searchTime) && (getColorName(S1) != colorBlack)){
-		searchLeft();
-	}
-	STP();
 }
 
 void findLeft(){
@@ -137,12 +140,12 @@ void findLeft(){
 	while ((getColorName(S1)==colorBlack)&&(getColorName(S4)!= colorBlack)){
 		searchLeft();
 	}
-	if ((getColorName(S1)==colorBlack)&&(getColorName(S4)==colorBlack)){
+	/*if ((getColorName(S1)==colorBlack)&&(getColorName(S4)==colorBlack)){
 		while(getColorName(S4)!= colorBlack){
 			searchLeft();
 		}
 		moveCM(1.0);
-	}
+	}*/
 	sleep(500);
 }
 void findRight(){
@@ -150,12 +153,12 @@ void findRight(){
 	while ((getColorName(S1)!=colorBlack)&&(getColorName(S4)==colorBlack)){
 		searchRight();
 	}
-	if ((getColorName(S1)==colorBlack)&&(getColorName(S4)==colorBlack)){
+	/*if ((getColorName(S1)==colorBlack)&&(getColorName(S4)==colorBlack)){
 		while(getColorName(S1) != colorBlack){
 			searchRight();
 		}
 		moveCM(1.0);
-	}
+	}*/
 	sleep(500);
 }
 

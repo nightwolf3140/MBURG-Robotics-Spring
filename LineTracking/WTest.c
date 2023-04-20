@@ -55,21 +55,20 @@ void linetracking(){
 	}
 	if((getColorName(S1) == colorBlack) || (getColorName(S4) == colorBlack)){
 		STP();
-		sleep(200);
+		sleep(1000);
 		if((getColorName(S1) == colorBlack) && (getColorName(S4) == colorBlack)){
-			STP();
-			findLine();
+			findLine(true);
 		}
 		else if((getColorName(S1) == colorBlack) && (getColorName(S4) != colorBlack)){
 			//leftNudge();
 			findLeft();
-			moveCM(1.0);
+			moveCM(0.7);
 		}
 
 		else if((getColorName(S1) != colorBlack) && (getColorName(S4) == colorBlack)){
 			//rightNudge();
 			findRight();
-			moveCM(1.0);
+			moveCM(0.7);
 		}
 	}
 
@@ -98,7 +97,7 @@ setTurnSpeed(10);
 setTurnValue(200);
 setWheelDiamter(7.4);
 setWallDist(8); //Units in CM
-setLineWidthCM(4.0);//make sure to use float values
+setLineWidthCM(6.0);//make sure to use float values
 setSearchTime(6.0);
 coasting(false);//autobraking
 }
