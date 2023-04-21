@@ -35,7 +35,7 @@ void linetracking(){
 		playSound(soundBeepBeep);
 		setLEDColor(ledRedPulse);
 	}
-	if((getColorName(S1) == colorGreen) || (getColorName(S4) == colorGreen)){
+	else if((getColorName(S1) == colorGreen) || (getColorName(S4) == colorGreen)){
 		STP();
 		setLEDColor(ledGreen);
 		sleep(2000);
@@ -53,7 +53,7 @@ void linetracking(){
 			sleep(200);
 		}
 	}
-	if((getColorName(S1) == colorBlack) || (getColorName(S4) == colorBlack)){
+	else if((getColorName(S1) == colorBlack) || (getColorName(S4) == colorBlack)){
 		STP();
 		sleep(1000);
 		if((getColorName(S1) == colorBlack) && (getColorName(S4) == colorBlack)){
@@ -61,18 +61,24 @@ void linetracking(){
 		}
 		else if((getColorName(S1) == colorBlack) && (getColorName(S4) != colorBlack)){
 			//leftNudge();
-			findLeft();
-			moveCM(0.7);
+			moveCM(0.5);
+			while((getColorName(S1) != colorWhite) && (getColorName(S4) == colorWhite)){
+				findLeft();
+			}
+			STP();
 		}
 
 		else if((getColorName(S1) != colorBlack) && (getColorName(S4) == colorBlack)){
 			//rightNudge();
-			findRight();
-			moveCM(0.7);
+			moveCM(0.5);
+			while((getColorName(S1) == colorWhite) && (getColorName(S4) != colorWhite)){
+				findRight();
+			}
+			STP();
 		}
 	}
 
-	if((getColorName(S1) == colorWhite) && (getColorName(S4) == colorWhite)){
+	else if((getColorName(S1) == colorWhite) && (getColorName(S4) == colorWhite)){
 		setLEDColor(ledGreenPulse);
 		forwards();
 	}
@@ -94,11 +100,11 @@ void setProperties(){ //change properties here instead of headerfile
 setUTurn(435);
 setSpeed(15);
 setTurnSpeed(10);
-setTurnValue(200);
+setTurnValue(230);//was 200
 setWheelDiamter(7.4);
 setWallDist(8); //Units in CM
 setLineWidthCM(6.0);//make sure to use float values
-setSearchTime(6.0);
+setSearchTime(3.5);
 coasting(false);//autobraking
 }
 
