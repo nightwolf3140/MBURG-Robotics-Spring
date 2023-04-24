@@ -118,12 +118,12 @@ void searchLeft(){
 
 
 void findLine(bool hold){
-	STP();
-	playSound(soundException);
-	moveCM(lineWidthCM);
-	sleep(1000);
-	clearTimer(T1);
 	while(hold == true){
+		STP();
+		playSound(soundException);
+		moveCM(lineWidthCM);
+		sleep(1000);
+		clearTimer(T1);
 		while((time1[T1] < searchTime) && (getColorName(S4) != colorBlack)){
 			searchRight();
 		}
@@ -172,7 +172,7 @@ void homeArm(){
 
 task initDis(){//Initialize display(){
 	int time = 4;
-	repeat(3){
+	repeat(4){
 		time=time-1;
 		displayCenteredBigTextLine(2, "Initializing: %d", time);
 		displayCenteredBigTextLine(6, "Team Eclipse:");
