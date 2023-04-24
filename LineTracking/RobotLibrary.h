@@ -118,12 +118,12 @@ void searchLeft(){
 
 
 void findLine(bool hold){
+	STP();
+	playSound(soundException);
+	moveCM(lineWidthCM);
+	sleep(1000);
+	clearTimer(T1);
 	while(hold == true){
-		STP();
-		playSound(soundException);
-		moveCM(lineWidthCM);
-		sleep(1000);
-		clearTimer(T1);
 		while((time1[T1] < searchTime) && (getColorName(S4) != colorBlack)){
 			searchRight();
 		}
