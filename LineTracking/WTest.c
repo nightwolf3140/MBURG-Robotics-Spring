@@ -103,7 +103,7 @@ setTurnSpeed(10);
 setTurnValue(230);//was 200
 setWheelDiamter(7.4);
 setWallDist(8); //Units in CM
-setLineWidthCM(6.0);//make sure to use float values
+setLineWidthCM(6);//make sure to use float values
 setSearchTime(3.5);
 coasting(false);//autobraking
 }
