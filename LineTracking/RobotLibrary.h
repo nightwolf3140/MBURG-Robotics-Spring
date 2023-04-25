@@ -5,6 +5,7 @@ int speed = 5;
 float turnSpeed = 10;//speed times direction (positive/negative)
 float lineWidthCM = 4.0; //distance of tape line
 float WheelDiamterCM = 7.4; //Stock ev3
+float robotDiameterCM = 19.5;
 int WallDistCM = 8;
 float searchTime = 2;
 
@@ -25,14 +26,6 @@ void forwards(int x){ //controled speed
 	motor[motorC] = x;
 }
 
-void uTurn(){
-	rsMotors();
-	setMotorTarget(motorB,uTurnValue,turnSpeed);
-	setMotorTarget(motorC,-uTurnValue,turnSpeed);
-	waitUntilMotorStop(motorC);
-}
-
-
 void STP(){ //kinda irelivant with stopAllMotors();
 	rsMotors();
 	motor[motorB] = 0;
@@ -42,7 +35,9 @@ void STP(){ //kinda irelivant with stopAllMotors();
 float convertEncoderToCM(int encoderCounts){
 	return(encoderCounts / 360.0)*(WheelDiamterCM * PI);
 }
-
+float CalcRadToDeg(float x){
+	return x*(robotDiameterCM/WheelDiamterCM);
+}
 /*float convertCMToDegrees(float y){ //converts CM imput to wheel degrees
 	return y/(WheelDiamterCM*PI)*360;
 }*/
@@ -61,6 +56,7 @@ void leftPointTurn(){
 	moveCM(lineWidthCM);
 	sleep(1000);
 	rsMotors();
+	vpointTurn=CalcRadToDeg(90);
 	setMotorTarget(motorB,-vpointTurn,turnSpeed);
 	setMotorTarget(motorC,vpointTurn,turnSpeed);
 	waitUntilMotorStop(motorC);
@@ -73,11 +69,20 @@ void rightPointTurn(){
 	moveCM(lineWidthCM);
 	sleep(1000);
 	rsMotors();
+	vpointTurn=CalcRadToDeg(90);
 	setMotorTarget(motorB,vpointTurn,turnSpeed);
 	setMotorTarget(motorC,-vpointTurn,turnSpeed);
 	waitUntilMotorStop(motorC);
 	sleep(200);
 	moveCM(2.5);
+}
+
+void uTurn(){
+	rsMotors();
+	uTurnValue=CalcRadToDeg(180);
+	setMotorTarget(motorB,uTurnValue,turnSpeed);
+	setMotorTarget(motorC,-uTurnValue,turnSpeed);
+	waitUntilMotorStop(motorC);
 }
 
 void leftNudge(){
@@ -123,11 +128,14 @@ void findLine(bool hold){
 		playSound(soundException);
 		moveCM(lineWidthCM);
 		sleep(1000);
+		if((getColorName(S1) == colorGreen) || (getcolorName(S4) == colorGreen)){
+			moveCM(lineWidthCM);
+		}
 		clearTimer(T1);
-		while((time1[T1] < searchTime) && (getColorName(S4) != colorBlack)){
+		while((time1[T1] < searchTime) && (getColorName(S1) != colorBlack)){
 			searchRight();
 		}
-		while((time1[T1] > searchTime) && (getColorName(S1) != colorBlack)){
+		while((time1[T1] > searchTime) && (getColorName(S4) != colorBlack)){
 			searchLeft();
 		}
 		STP();
@@ -212,6 +220,9 @@ void setLineWidthCM(float x){
 
 void setSearchTime(float x){
 	searchTime=x;
+}
+void setRobotDiameterCM(float x){
+	robotDiameterCM=x;
 }
 
 void coasting(bool coast){

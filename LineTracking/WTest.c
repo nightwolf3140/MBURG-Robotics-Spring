@@ -100,10 +100,11 @@ void setProperties(){ //change properties here instead of headerfile
 setUTurn(435);
 setSpeed(15);
 setTurnSpeed(10);
-setTurnValue(230);//was 200
+setTurnValue(137);//was 230
 setWheelDiamter(7.4);
+setRobotDiameterCM(19.5);
 setWallDist(8); //Units in CM
-setLineWidthCM(6);//make sure to use float values
+setLineWidthCM(3.0);//make sure to use float values
 setSearchTime(3.5);
 coasting(false);//autobraking
 }
