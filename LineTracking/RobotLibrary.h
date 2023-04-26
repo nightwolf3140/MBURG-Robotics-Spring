@@ -1,4 +1,4 @@
-int m = 1; //Motor Vector
+//int m = 1; //Motor Vector (obsolete)
 int uTurnValue = 500;
 int vpointTurn = 200; //point turn value
 int speed = 5;
@@ -129,7 +129,7 @@ void findLine(bool hold){
 		playSound(soundException);
 		moveCM(lineWidthCM);
 		sleep(1000);
-		if((getColorName(S1) == colorGreen) || (getcolorName(S4) == colorGreen)){
+		if((getColorName(S1) == colorGreen) || (getColorName(S4) == colorGreen)){
 			moveCM(lineWidthCM);
 		}
 		clearTimer(T1);
