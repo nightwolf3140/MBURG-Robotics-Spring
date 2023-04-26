@@ -32,31 +32,41 @@ task display(){//Onboard Debugger system
 
 void findBall()
 {
-repeat(forever){
-	if(SensorValue(S2) < 30)
+repeat(forever)
 	{
+	if(SensorValue(S2) < 30)
+		{
 	moveCM(1);
 		if(SensorValue(S3) < 17)
-		{
+			{
 			STP();
 			moveCM(-3);
 			uTurn();
-
+			leftPointTurn();
+			}
 		}
-	}
 	else
 		{
 		STP();
-		setMotorTarget(motorA, 20, 10);
-		waitUntilMotorStop(motorA);
-		moveCM(-3);
+		setMotorTarget(motorA, 20, 50);
+		sleep(500);
+		moveCM(-2);
 		uTurn();
-		if((getColorName(S1) == colorBlack) && (getColorName(S4) == colorBlack)){
-			setMotorTarget(motorA, -20, 10);
-		}
+		leftPointTurn();
+		while((getColorName(s1)!=colorBlack && (getColorName(S4)!= colorBlack))
+			{
+				moveCM(2);
+				if(SensorValue(S3)<17)
+				{
+					STP();
+					moveCM(-3);
+					uTurn();
+					leftPointTurn()
+				}
+				setMotorTarget(motorA, -20, 50);
+				uTurn();
 
-
-
+			}
 
 		}
 	}
@@ -72,7 +82,7 @@ void rescueRoom(){//code here
 
 void setProperties(){ //change properties here instead of headerfile
 setUTurn(435);
-setSpeed(40);
+setSpeed(30);
 setTurnSpeed(10);
 setTurnValue(230);//was 200
 setWheelDiamter(7.4);

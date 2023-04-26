@@ -30,6 +30,30 @@ task display(){//Onboard Debugger system
 	}
 }
 
+void avoidObstacle(){
+	bool wall = checkObstacle();
+	if(wall == true){
+		STP();
+		leftPointTurn();
+		repeat(7){
+				moveCM(1);
+				if ((getColorName(S1)==colorBlack)||(getColorName(S2)==colorBlack)){
+					return;
+				}
+		}
+		rightPointTurn();
+		repeat(3){
+			repeat(17){
+				moveCM(1);
+				if ((getColorName(S1)==colorBlack)||(getColorName(S2)==colorBlack)){
+					return;
+				}
+			}
+			rightPointTurn();
+		}
+	}
+}
+
 void linetracking(){
 	if((getColorName(S1) == colorRed) || (getColorName(S4) == colorRed)){
 		STP();
@@ -44,13 +68,17 @@ void linetracking(){
 			uTurn();
 			sleep(200);
 			moveCM(1);
+			avoidObstacle();
 		}
 		else if ((getColorName(S1)==colorGreen)&&(getColorName(S4)== colorWhite)){
 			leftPointTurn();
+			avoidObstacle();
 			sleep(200);
+
 		}
 		else if ((getColorName(S1)==colorWhite)&&(getColorName(S4)==colorGreen)){
 			rightPointTurn();
+			avoidObstacle();
 			sleep(200);
 		}
 	}
@@ -82,6 +110,7 @@ void linetracking(){
 	else if((getColorName(S1) == colorWhite) && (getColorName(S4) == colorWhite)){
 		setLEDColor(ledGreenPulse);
 		forwards();
+		avoidObstacle();
 	}
 	else{
 		//playSound(soundException); //Means color sensor tripping out
@@ -104,8 +133,13 @@ setTurnSpeed(10);
 setTurnValue(137);//was 230
 setWheelDiamter(7.4);
 setRobotDiameterCM(19.5);
+<<<<<<< HEAD
 setWallDist(8); //Units in CM
 setLineWidthCM(3.4);//make sure to use float values
+=======
+setWallDist(10); //Units in CM
+setLineWidthCM(3.0);//make sure to use float values
+>>>>>>> f7de9ab9f2d312d1640e4b00e8fcbdf16018dd63
 setSearchTime(5.0);
 coasting(false);//autobraking
 }
