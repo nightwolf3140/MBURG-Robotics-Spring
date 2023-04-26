@@ -39,7 +39,7 @@ void linetracking(){
 		STP();
 		setLEDColor(ledGreen);
 		sleep(2000);
-		if((getColorName(S1) == colorGreen) && (getColorName(S4) == colorGreen)){
+		if(((getColorName(S1) == colorGreen) && (getColorName(S4) == colorGreen)) || ((getColorName(S1) == colorGreen) && (getColorName(S4) == colorBlack)) || ((getColorName(S1) == colorBlack) && (getColorName(S4) == colorGreen))){
 			uTurn();
 			sleep(200);
 			moveCM(1);
@@ -105,7 +105,7 @@ setWheelDiamter(7.4);
 setRobotDiameterCM(19.5);
 setWallDist(8); //Units in CM
 setLineWidthCM(3.0);//make sure to use float values
-setSearchTime(3.5);
+setSearchTime(4.5);
 coasting(false);//autobraking
 }
 
