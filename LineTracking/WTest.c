@@ -26,6 +26,7 @@ task display(){//Onboard Debugger system
 		displayBigTextLine(8, "USS: %d", getUSDistance(S3)); //Ultrasonic sensor
 		displayBigTextLine(10, "B: %d", getMotorEncoder(leftMotor));
 		displayBigTextLine(12, "C: %d", getMotorEncoder(rightMotor));
+		displayBigTextLine(14, "T1: %d", time1[T1]);
 	}
 }
 
@@ -44,11 +45,11 @@ void linetracking(){
 			sleep(200);
 			moveCM(1);
 		}
-		else if ((getColorName(S1)==colorGreen)&&(getColorName(S4)!=colorGreen)){
+		else if ((getColorName(S1)==colorGreen)&&(getColorName(S4)== colorWhite)){
 			leftPointTurn();
 			sleep(200);
 		}
-		else if ((getColorName(S1)!=colorGreen)&&(getColorName(S4)==colorGreen)){
+		else if ((getColorName(S1)==ColorWhite)&&(getColorName(S4)==colorGreen)){
 			rightPointTurn();
 			sleep(200);
 		}
@@ -105,7 +106,7 @@ setWheelDiamter(7.4);
 setRobotDiameterCM(19.5);
 setWallDist(8); //Units in CM
 setLineWidthCM(3.0);//make sure to use float values
-setSearchTime(4.5);
+setSearchTime(5.0);
 coasting(false);//autobraking
 }
 
