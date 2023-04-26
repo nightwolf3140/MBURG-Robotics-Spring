@@ -1,6 +1,6 @@
 #pragma config(Sensor, S1,     leftS,          sensorEV3_Color, modeEV3Color_Color)
-#pragma config(Sensor, S2,     ScoopSensor,    sensorEV3_Color, modeEV3Color_Color)
-#pragma config(Sensor, S3,     reflect,        sensorEV3_Ultrasonic)
+#pragma config(Sensor, S2,     ScoopSensor,    sensorEV3_Color)
+#pragma config(Sensor, S3,     ultrs,          sensorEV3_Ultrasonic)
 #pragma config(Sensor, S4,     rightS,         sensorEV3_Color, modeEV3Color_Color)
 #pragma config(Motor,  motorA,          armMotor,      tmotorEV3_Medium, PIDControl, encoder)
 #pragma config(Motor,  motorB,          leftMotor,     tmotorEV3_Large, PIDControl, driveLeft, encoder)
@@ -30,12 +30,40 @@ task display(){//Onboard Debugger system
 	}
 }
 
-void findBall(){
-while ((getColorName(S2)!=colorBlack)){
-	moveCM(2);
+void findBall()
+{
+repeat(forever){
+	if(SensorValue(S2) < 30)
+	{
+	moveCM(1);
+		if(SensorValue(S3) < 17)
+		{
+			STP();
+			moveCM(-3);
+			uTurn();
 
+		}
+	}
+	else
+		{
+		STP();
+		setMotorTarget(motorA, 20, 10);
+		waitUntilMotorStop(motorA);
+		moveCM(-3);
+		uTurn();
+		if((getColorName(S1) == colorBlack) && (getColorName(S4) == colorBlack)){
+			setMotorTarget(motorA, -20, 10);
+		}
+
+
+
+
+		}
 	}
 }
+
+
+
 
 void rescueRoom(){//code here
 	findBall();
@@ -44,7 +72,7 @@ void rescueRoom(){//code here
 
 void setProperties(){ //change properties here instead of headerfile
 setUTurn(435);
-setSpeed(15);
+setSpeed(40);
 setTurnSpeed(10);
 setTurnValue(230);//was 200
 setWheelDiamter(7.4);
@@ -72,7 +100,7 @@ startTask(display);//Starts debugger screen
 task main(){
 	init(); //Config
 	repeat(forever){
-		setMotorTarget(motorA, -100, 10);
+		setMotorTarget(motorA, -125, 10);
 		rescueRoom();
 	}
 }
