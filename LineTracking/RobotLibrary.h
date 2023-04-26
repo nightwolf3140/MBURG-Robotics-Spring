@@ -50,7 +50,6 @@ void moveCM(float y){ //move given distance in CM
 	rsMotors();
 	setMotorTarget(motorB, x, speed);
 	setMotorTarget(motorC, x, speed);
-	//avoidObstacle();
 	waitUntilMotorStop(motorC);
 }
 void leftPointTurn(){
