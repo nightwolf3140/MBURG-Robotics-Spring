@@ -172,9 +172,12 @@ void findRight(){
 
 void homeArm(){
 	motor[motorA] = 10;
+	motor[motorD] = 10;
 	sleep(2000);
 	motor[motorA] = 0;
+	motor[motorD] = 0;
 	resetMotorEncoder(motorA);
+	resetMotorEncoder(motorD);
 }
 //setproperties
 
