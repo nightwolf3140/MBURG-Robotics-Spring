@@ -35,16 +35,15 @@ void findBall()
 {
 repeat(forever)
 	{
-	if(SensorValue(S2) < 30)
+	while(SensorValue(S2) < 30){
+		forwards();
+		}
+	if(SensorValue(S3) < 17)
 		{
-	moveCM(1);
-		if(SensorValue(S3) < 17)
-			{
-			STP();
-			moveCM(-3);
-			uTurn();
-			leftPointTurn();
-			}
+		STP();
+		moveCM(-3);
+		uTurn();
+		leftPointTurn();
 		}
 		else
 		{
