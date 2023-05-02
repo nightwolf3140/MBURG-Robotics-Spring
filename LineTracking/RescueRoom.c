@@ -96,7 +96,7 @@ clearSounds();
 clearTimer(T1);
 eraseDisplay();
 startTask(initDis);//Boot Screen
-homeArm();//Moves arm all the way up
+storeArm();//Moves arm all the way up
 rsMotors();
 bFloatDuringInactiveMotorPWM=false; //Motor coasting
 setProperties(); //config settings
@@ -108,8 +108,8 @@ startTask(display);//Starts debugger screen
 
 task main(){
 	init(); //Config
+	armDown();
 	repeat(forever){
-		setMotorTarget(motorA, -125, 10);
 		rescueRoom();
 	}
 }

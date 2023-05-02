@@ -170,17 +170,23 @@ void findRight(){
 	sleep(500);
 }
 
-void homeArm(){
+void storeArm(){
 	motor[motorA] = 10;
 	motor[motorD] = 10;
 	sleep(2000);
 	motor[motorA] = 0;
 	motor[motorD] = 0;
-	resetMotorEncoder(motorA);
-	resetMotorEncoder(motorD);
+	//resetMotorEncoder(motorA);
+	//resetMotorEncoder(motorD);
 }
 //setproperties
 
+void armDown(){
+	setMotorTarget(motorA, 10, 0);
+	setMotorTarget(motorD, 10, 0);
+	waitUntilMotorStop(motorD);
+	sleep(200);
+}
 task initDis(){//Initialize display(){
 	int time = 4;
 	repeat(4){
