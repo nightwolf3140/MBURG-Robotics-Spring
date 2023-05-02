@@ -182,8 +182,8 @@ void storeArm(){
 //setproperties
 
 void armDown(){
-	setMotorTarget(motorA, 10, 0);
-	setMotorTarget(motorD, 10, 0);
+	setMotorTarget(motorA, 0, 15);
+	setMotorTarget(motorD, 0, 15);
 	waitUntilMotorStop(motorD);
 	sleep(200);
 }

@@ -35,24 +35,18 @@ void findBall()
 {
 repeat(forever)
 	{
-	while(SensorValue(S2) < 30){
+	if(SensorValue(S2) < 30){
 		forwards();
 		}
 	if(SensorValue(S3) < 17)
 		{
 		STP();
 		moveCM(-3);
-		uTurn();
-		leftPointTurn();
+		rightPointTurn();
 		}
 		else
 		{
-		STP();
-		setMotorTarget(motorA, 20, 50);
-		sleep(500);
-		moveCM(-2);
-		uTurn();
-		leftPointTurn();
+		forwards();
 		while((getColorName(s1)!=colorBlack && (getColorName(S4)!= colorBlack))
 			{
 				moveCM(2);
@@ -62,7 +56,6 @@ repeat(forever)
 					moveCM(-3);
 					rightPointTurn()
 				}
-				setMotorTarget(motorA, -20, 50);
 				uTurn();
 
 			}
@@ -81,7 +74,7 @@ void rescueRoom(){//code here
 
 void setProperties(){ //change properties here instead of headerfile
 setUTurn(435);
-setSpeed(30);
+setSpeed(10);
 setTurnSpeed(10);
 setTurnValue(230);//was 200
 setWheelDiamter(7.4);
@@ -96,6 +89,7 @@ clearSounds();
 clearTimer(T1);
 eraseDisplay();
 startTask(initDis);//Boot Screen
+resetMotorEncoder(motorA);
 storeArm();//Moves arm all the way up
 rsMotors();
 bFloatDuringInactiveMotorPWM=false; //Motor coasting
