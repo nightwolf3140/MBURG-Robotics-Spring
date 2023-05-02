@@ -16,7 +16,7 @@
 
 	William Sellery
 	Frederick Wu
-	Justin
+	Justin Oh
 
 */
 task display(){//Onboard Debugger system
@@ -29,6 +29,7 @@ task display(){//Onboard Debugger system
 		displayBigTextLine(12, "C: %d", getMotorEncoder(rightMotor));
 	}
 }
+
 
 void findBall()
 {
@@ -45,7 +46,7 @@ repeat(forever)
 			leftPointTurn();
 			}
 		}
-	else
+		else
 		{
 		STP();
 		setMotorTarget(motorA, 20, 50);
@@ -60,8 +61,7 @@ repeat(forever)
 				{
 					STP();
 					moveCM(-3);
-					uTurn();
-					leftPointTurn()
+					rightPointTurn()
 				}
 				setMotorTarget(motorA, -20, 50);
 				uTurn();
