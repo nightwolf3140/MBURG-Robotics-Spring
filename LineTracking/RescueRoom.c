@@ -31,7 +31,46 @@ task display(){//Onboard Debugger system
 }
 
 
-void findBall()
+void findBall(){
+	if(SensorValue(S2) < 30){
+		forwards();
+	}
+		else if(SensorValue(S2) > 10){
+		STP();
+		//moveArmUp();
+		//findBox();
+	}
+	if (checkObstacle() == true){
+		STP();
+		moveCM(-3.0);
+		rightPointTurn();
+	}
+}
+
+void findBox(){
+	if((getColorName(S1)==colorBlack) && (getColorName(S4)== colorBlack)){
+		moveCM(2.0);
+		if((getColorName(S1)==colorBlack) && (getColorName(S4)== colorBlack)){
+			armDown();
+			sleep(200);
+			moveCM(-5.0);
+			uTurn();
+		}
+		else{
+			moveCM(-5);
+			uTurn();
+		}
+	}
+	else if(checkObstacle() == true){
+		STP();
+		moveCM(-3);
+		rightPointTurn();
+	}
+	else{
+		moveCM(-1.0);
+	}
+}
+/*void findBall()
 {
 repeat(forever)
 	{
@@ -63,7 +102,7 @@ repeat(forever)
 		}
 	}
 }
-
+*/
 
 
 
