@@ -37,10 +37,10 @@ void findBall(){
 	}
 		else if(SensorValue(S2) > 10){
 		STP();
-		//moveArmUp();
-		//findBox();
+
+		findBox();
 	}
-	if (checkObstacle() == true){
+	else if (checkObstacle() == true){
 		STP();
 		moveCM(-3.0);
 		rightPointTurn();
