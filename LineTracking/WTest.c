@@ -145,7 +145,7 @@ clearSounds();
 clearTimer(T1);
 eraseDisplay();
 startTask(initDis);//Boot Screen
-homeArm();//Moves arm all the way up
+storeArm();//Moves arm all the way up
 rsMotors();
 bFloatDuringInactiveMotorPWM=false; //Motor coasting
 setProperties(); //config settings
