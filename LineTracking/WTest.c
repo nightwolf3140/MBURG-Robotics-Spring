@@ -1,5 +1,5 @@
 #pragma config(Sensor, S1,     leftS,          sensorEV3_Color, modeEV3Color_Color)
-#pragma config(Sensor, S2,     reflect,        sensorEV3_Color)
+#pragma config(Sensor, S2,     ScoopSensor,    sensorEV3_Color, modeEV3Color_Ambient)
 #pragma config(Sensor, S3,     ultrasonic,     sensorEV3_Ultrasonic)
 #pragma config(Sensor, S4,     rightS,         sensorEV3_Color, modeEV3Color_Color)
 #pragma config(Motor,  motorA,          leftArm,       tmotorEV3_Medium, PIDControl, driveLeft, encoder)
