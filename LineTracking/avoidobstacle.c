@@ -1,7 +1,7 @@
 #pragma config(Sensor, S1,     leftS,          sensorEV3_Color, modeEV3Color_Color)
-#pragma config(Sensor, S2,     rightS,         sensorEV3_Color, modeEV3Color_Color)
-#pragma config(Sensor, S3,     reflect,        sensorEV3_Color)
-#pragma config(Sensor, S4,     sonarSensor,    sensorEV3_Ultrasonic)
+#pragma config(Sensor, S2,     ScoopSensor,    sensorEV3_Color)
+#pragma config(Sensor, S3,     ultrs,          sensorEV3_Ultrasonic)
+#pragma config(Sensor, S4,     rightS,         sensorEV3_Color, modeEV3Color_Color)
 #pragma config(Motor,  motorA,          armMotor,      tmotorEV3_Medium, PIDControl, encoder)
 #pragma config(Motor,  motorB,          leftMotor,     tmotorEV3_Large, PIDControl, driveLeft, encoder)
 #pragma config(Motor,  motorC,          rightMotor,    tmotorEV3_Large, PIDControl, driveRight, encoder)
@@ -24,7 +24,7 @@ task display(){//Onboard Debugger system
 		displayCenteredTextLine(1, "Onboard Debugger");
 		displayBigTextLine(3, "LCS: %d", getColorName(leftS)); //left sensor
 		displayBigTextLine(6, "RCS: %d", getColorName(rightS)); //Right sensor
-		displayBigTextLine(8, "USS: %d", getUSDistance(sonarSensor)); //Ultrasonic sensor
+		displayBigTextLine(8, "USS: %d", getUSDistance(S3)); //Ultrasonic sensor
 		displayBigTextLine(10, "B: %d", getMotorEncoder(leftMotor));
 		displayBigTextLine(12, "C %d", getMotorEncoder(rightMotor));
 	}
@@ -44,7 +44,7 @@ void avoidObstacle(){
 		STP();
 		leftPointTurn();
 		repeat(7){
-				moveforward(20);
+				moveCM(1);
 				if ((getColorName(S1)==colorBlack)||(getColorName(S2)==colorBlack)){
 					return;
 				}
@@ -52,7 +52,7 @@ void avoidObstacle(){
 		rightPointTurn();
 		repeat(3){
 			repeat(14){
-				moveforward(20);
+				moveCM(1);
 				if ((getColorName(S1)==colorBlack)||(getColorName(S2)==colorBlack)){
 					return;
 				}
