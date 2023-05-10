@@ -71,15 +71,13 @@ void linetracking(){
 			moveCM(1);
 			avoidObstacle();
 		}
-		else if ((getColorName(S1)==colorGreen)&&(getColorName(S4)== colorWhite)){
+		else if (getColorName(S1)==colorGreen){
 			leftPointTurn();
-			avoidObstacle();
 			sleep(200);
 
 		}
-		else if ((getColorName(S1)==colorWhite)&&(getColorName(S4)==colorGreen)){
+		else if(getColorName(S4)==colorGreen){
 			rightPointTurn();
-			avoidObstacle();
 			sleep(200);
 		}
 	}
@@ -135,7 +133,7 @@ setTurnValue(137);//was 230
 setWheelDiamter(7.4);
 setRobotDiameterCM(19.5);
 setWallDist(10); //Units in CM
-setLineWidthCM(3.4);//make sure to use float values
+setLineWidthCM(4.5);//make sure to use float values (4.5)
 setSearchTime(5.0);
 coasting(false);//autobraking
 }
