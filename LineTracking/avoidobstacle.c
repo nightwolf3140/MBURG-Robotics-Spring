@@ -30,13 +30,13 @@ task display(){//Onboard Debugger system
 	}
 }
 
-void moveforward(int x){
+/*void moveforward(int x){
 	resetMotorEncoder(motorB);
 	resetMotorEncoder(motorC);
 	setMotorTarget(motorB,x,10);
 	setMotorTarget(motorC,x,10);
 	waitUntilMotorStop(motorC);
-}
+}*/
 
 void avoidObstacle(){
 	bool wall = checkObstacle();

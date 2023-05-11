@@ -69,7 +69,6 @@ void linetracking(){
 			uTurn();
 			sleep(200);
 			moveCM(1);
-			avoidObstacle();
 		}
 		else if (getColorName(S1)==colorGreen){
 			leftPointTurn();
@@ -109,7 +108,6 @@ void linetracking(){
 	else if((getColorName(S1) == colorWhite) && (getColorName(S4) == colorWhite)){
 		setLEDColor(ledGreenPulse);
 		forwards();
-		avoidObstacle();
 	}
 	else{
 		//playSound(soundException); //Means color sensor tripping out
@@ -128,7 +126,7 @@ void linetracking(){
 void setProperties(){ //change properties here instead of headerfile
 setUTurn(435);
 setSpeed(15);
-setTurnSpeed(10);
+setTurnSpeed(6);
 setTurnValue(137);//was 230
 setWheelDiamter(7.4);
 setRobotDiameterCM(19.5);
