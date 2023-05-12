@@ -133,10 +133,10 @@ void findLine(bool hold){
 		}
 		clearTimer(T1);
 		while((time1[T1] < searchTime) && (getColorName(S1) != colorBlack)){
-			searchRight();
+			searchLeft();
 		}
 		while((time1[T1] > searchTime) && (getColorName(S4) != colorBlack)){
-			searchLeft();
+			searchRight();
 		}
 		STP();
 		hold=false;
