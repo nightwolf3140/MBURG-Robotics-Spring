@@ -132,11 +132,11 @@ void findLine(bool hold){
 			moveCM(lineWidthCM);
 		}
 		clearTimer(T1);
-		while((time1[T1] < searchTime) && (getColorName(S4) != colorBlack)){
-			searchLeft();
-		}
-		while((time1[T1] > searchTime) && (getColorName(S1) != colorBlack)){
+		while((time1[T1] < searchTime) && (getColorName(S1) != colorBlack)){
 			searchRight();
+		}
+		while((time1[T1] > searchTime) && (getColorName(S4) != colorBlack)){
+			searchLeft();
 		}
 		STP();
 		hold=false;
