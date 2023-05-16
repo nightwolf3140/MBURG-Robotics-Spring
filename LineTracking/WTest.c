@@ -16,7 +16,7 @@
 
 	William Sellery
 	Frederick Wu
-	Justin
+	Justin Oh
 
 */
 task display(){//Onboard Debugger system
