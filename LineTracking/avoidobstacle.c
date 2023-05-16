@@ -43,16 +43,16 @@ void avoidObstacle(){
 	if(wall == true){
 		STP();
 		leftPointTurn();
-		repeat(7){
-				moveCM(1);
+		repeat(13){
+				moveCM(1.0);
 				if ((getColorName(S1)==colorBlack)||(getColorName(S2)==colorBlack)){
 					return;
 				}
 		}
 		rightPointTurn();
 		repeat(3){
-			repeat(14){
-				moveCM(1);
+			repeat(18){
+				moveCM(1.0);
 				if ((getColorName(S1)==colorBlack)||(getColorName(S2)==colorBlack)){
 					return;
 				}
@@ -68,7 +68,7 @@ setSpeed(15);
 setTurnSpeed(10);
 setTurnValue(190);
 setWheelDiamter(7.4);
-setWallDist(8); //Units in CM
+setWallDist(10.0); //Units in CM
 }
 
 void init(){ //First line of code to run
