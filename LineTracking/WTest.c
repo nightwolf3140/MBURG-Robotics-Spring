@@ -132,7 +132,7 @@ setWheelDiamter(7.4);
 setRobotDiameterCM(19.5);
 setWallDist(10); //Units in CM
 setLineWidthCM(4.5);//make sure to use float values (4.5)
-setSearchTime(4.0);
+setSearchTime(2.0);
 coasting(false);//autobraking
 }
 
