@@ -36,17 +36,17 @@ void avoidObstacle(){
 	if(wall == true){
 		STP();
 		leftPointTurn();
-		repeat(7){
-				moveCM(1);
-				if ((getColorName(S1)==colorBlack)||(getColorName(S2)==colorBlack)){
+		repeat(13){
+				moveCM(1.5);
+				if ((getColorName(S1)==colorBlack)||(getColorName(S4)==colorBlack)){
 					return;
 				}
 		}
 		rightPointTurn();
 		repeat(3){
-			repeat(17){
-				moveCM(1);
-				if ((getColorName(S1)==colorBlack)||(getColorName(S2)==colorBlack)){
+			repeat(18){
+				moveCM(1.0);
+				if ((getColorName(S1)==colorBlack)||(getColorName(S4)==colorBlack)){
 					return;
 				}
 			}
@@ -107,7 +107,13 @@ void linetracking(){
 
 	else if((getColorName(S1) == colorWhite) && (getColorName(S4) == colorWhite)){
 		setLEDColor(ledGreenPulse);
-		forwards();
+		bool wall = checkObstacle();
+		if(wall == false){
+			forwards();
+		}
+		else{
+			avoidObstacle();
+		}
 	}
 	else{
 		//playSound(soundException); //Means color sensor tripping out
@@ -116,39 +122,32 @@ void linetracking(){
 
 }
 
-/*void avoidObstacle(){
-	bool wall = checkObstacle();
-	if(wall == true){
-		STP();
-	}
-}
-*/ //To be replaced by avoidobstacle.c
 void setProperties(){ //change properties here instead of headerfile
-setUTurn(435);
-setSpeed(15);
-setTurnSpeed(6);
-setTurnValue(137);//was 230
-setWheelDiamter(7.4);
-setRobotDiameterCM(19.5);
-setWallDist(10); //Units in CM
-setLineWidthCM(4.5);//make sure to use float values (4.5)
-setSearchTime(4.0);
-coasting(false);//autobraking
+	setUTurn(435);
+	setSpeed(15);
+	setTurnSpeed(6);
+	setTurnValue(137);//was 230
+	setWheelDiamter(7.4);
+	setRobotDiameterCM(19.5);
+	setWallDist(13); //Units in CM
+	setLineWidthCM(4.5);//make sure to use float values (4.5)
+	setSearchTime(4.0);
+	coasting(false);//autobraking
 }
 
 void init(){ //First line of code to run
-clearSounds();
-clearTimer(T1);
-eraseDisplay();
-startTask(initDis);//Boot Screen
-storeArm();//Moves arm all the way up
-rsMotors();
-bFloatDuringInactiveMotorPWM=false; //Motor coasting
-setProperties(); //config settings
-sleep(2000);
-stopTask(initDis);//Boot screen
-eraseDisplay();
-startTask(display);//Starts debugger screen
+	clearSounds();
+	clearTimer(T1);
+	eraseDisplay();
+	startTask(initDis);//Boot Screen
+	storeArm();//Moves arm all the way up
+	rsMotors();
+	bFloatDuringInactiveMotorPWM=false; //Motor coasting
+	setProperties(); //config settings
+	sleep(2000);
+	stopTask(initDis);//Boot screen
+	eraseDisplay();
+	startTask(display);//Starts debugger screen
 }
 
 task main(){
