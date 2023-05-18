@@ -5,7 +5,7 @@ int speed = 5;
 float turnSpeed = 10;//speed times direction (positive/negative)
 float lineWidthCM = 4.0; //distance of tape line
 float WheelDiamterCM = 7.4; //Stock ev3
-float robotDiameterCM = 19.5;
+float robotDiameterCM = 22.0;
 int WallDistCM = 8;
 float searchTime = 2;
 

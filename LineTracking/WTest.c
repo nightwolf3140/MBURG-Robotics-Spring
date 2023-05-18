@@ -36,7 +36,7 @@ void avoidObstacle(){
 	if(wall == true){
 		STP();
 		leftPointTurn();
-		repeat(13){
+		repeat(3){
 				moveCM(1.5);
 				if ((getColorName(S1)==colorBlack)||(getColorName(S4)==colorBlack)){
 					return;
@@ -44,7 +44,7 @@ void avoidObstacle(){
 		}
 		rightPointTurn();
 		repeat(3){
-			repeat(18){
+			repeat(9){
 				moveCM(1.0);
 				if ((getColorName(S1)==colorBlack)||(getColorName(S4)==colorBlack)){
 					return;
@@ -128,7 +128,7 @@ void setProperties(){ //change properties here instead of headerfile
 	setTurnSpeed(6);
 	setTurnValue(137);//was 230
 	setWheelDiamter(7.4);
-	setRobotDiameterCM(19.5);
+	setRobotDiameterCM(22.0);
 	setWallDist(13); //Units in CM
 	setLineWidthCM(4.5);//make sure to use float values (4.5)
 	setSearchTime(4.0);
