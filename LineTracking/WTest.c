@@ -36,7 +36,7 @@ void avoidObstacle(){
 	if(wall == true){
 		STP();
 		leftPointTurn();
-		repeat(3){
+		repeat(4){
 				moveCM(1.5);
 				if ((getColorName(S1)==colorBlack)||(getColorName(S4)==colorBlack)){
 					return;

@@ -56,7 +56,7 @@ void leftPointTurn(){
 	moveCM(lineWidthCM);
 	sleep(1000);
 	rsMotors();
-	vpointTurn=CalcRadToDeg(90);
+	vpointTurn=CalcRadToDeg(90)-20;
 	setMotorTarget(motorB,-vpointTurn,turnSpeed);
 	setMotorTarget(motorC,vpointTurn,turnSpeed);
 	waitUntilMotorStop(motorC);
@@ -69,7 +69,7 @@ void rightPointTurn(){
 	moveCM(lineWidthCM);
 	sleep(1000);
 	rsMotors();
-	vpointTurn=CalcRadToDeg(90);
+	vpointTurn=CalcRadToDeg(90)-20;
 	setMotorTarget(motorB,vpointTurn,turnSpeed);
 	setMotorTarget(motorC,-vpointTurn,turnSpeed);
 	waitUntilMotorStop(motorC);
