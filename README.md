@@ -1,2 +1,2 @@
 # Team Eclipse
-Mercersburg Spring Robotics Team "Eclipse"
+Mercersburg Spring 2023 Robotics Team "Eclipse"
