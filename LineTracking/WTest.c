@@ -60,18 +60,21 @@ void linetracking(){
 		STP();
 		playSound(soundBeepBeep);
 		setLEDColor(ledRedPulse);
+		sleep(200);
 	}
 	else if((getColorName(S1) == colorGreen) || (getColorName(S4) == colorGreen)){
 		STP();
 		setLEDColor(ledGreen);
-		sleep(2000);
+		sleep(500);
 		if((getColorName(S1) == colorGreen) && (getColorName(S4) == colorGreen)){
 			uTurn();
 			sleep(200);
 			moveCM(1);
+			sleep(200);
 		}
 		else if ((getColorName(S1)==colorGreen) && (getColorName(S4) != colorGreen)){
 			leftNudge();
+			sleep(200);
 			if((getColorName(S1) == colorGreen) || (getColorName(S4) == colorGreen)){
 				return;
 			}
@@ -83,15 +86,19 @@ void linetracking(){
 		}
 		else if((getColorName(S4)==colorGreen) && (getColorName(S1) != colorGreen)){
 			leftNudge();
+			sleep(200);
 			if((getColorName(S1) == colorGreen) || (getColorName(S4) == colorGreen)){
+				sleep(200);
 				return;
 			}
 			else{
+				sleep(200);
 				rightNudge();
 				rightPointTurn();
 				sleep(200);
 			}
 		}
+
 	}
 	else if((getColorName(S1) == colorBlack) || (getColorName(S4) == colorBlack)){
 		STP();
@@ -132,7 +139,6 @@ void linetracking(){
 		//playSound(soundException); //Means color sensor tripping out
 		setLEDColor(ledRed);
 	}
-
 }
 
 void setProperties(){ //change properties here instead of headerfile
