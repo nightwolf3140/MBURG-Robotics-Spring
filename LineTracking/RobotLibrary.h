@@ -88,6 +88,28 @@ void uTurn(){
 void leftNudge(){
 	STP();
 	rsMotors();
+	moveCM(3.5);
+	sleep(200);
+	setMotorTarget(motorC, -100, 10);
+	waitUntilMotorStop(motorC);
+	setMotorTarget(motorB, -20, 10);
+	waitUntilMotorStop(motorB);
+}
+
+void rightNudge(){
+	STP();
+	rsMotors();
+	moveCM(3.5);
+	sleep(200);
+	setMotorTarget(motorB, -100, 10);
+	waitUntilMotorStop(motorB);
+	setMotorTarget(motorC, -20, 10);
+	waitUntilMotorStop(motorC);
+}
+
+/*void leftNudge(){ old code
+	STP();
+	rsMotors();
 	setMotorTarget(motorC, 10, 10);
 	waitUntilMotorStop(motorC);
 }
@@ -97,7 +119,7 @@ void rightNudge(){
 	rsMotors();
 	setMotorTarget(motorB, 10, 10);
 	waitUntilMotorStop(motorB);
-}
+}*/
 
 bool checkObstacle(){
 	bool wall;
