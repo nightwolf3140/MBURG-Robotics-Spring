@@ -172,8 +172,7 @@ void init(){ //First line of code to run
 
 task main(){
 	init(); //Config
-	LeftNudge();
 	repeat(forever){
-		//linetracking();
+		linetracking();
 	}
 }

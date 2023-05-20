@@ -88,15 +88,23 @@ void uTurn(){
 void leftNudge(){
 	STP();
 	rsMotors();
-	setMotorTarget(motorC, -30, 10);
+	moveCM(3.5);
+	sleep(200);
+	setMotorTarget(motorC, -100, 10);
 	waitUntilMotorStop(motorC);
+	setMotorTarget(motorB, -20, 10);
+	waitUntilMotorStop(motorB);
 }
 
 void rightNudge(){
 	STP();
 	rsMotors();
-	setMotorTarget(motorB, -30, 10);
+	moveCM(3.5);
+	sleep(200);
+	setMotorTarget(motorB, -100, 10);
 	waitUntilMotorStop(motorB);
+	setMotorTarget(motorC, -20, 10);
+	waitUntilMotorStop(motorC);
 }
 
 /*void leftNudge(){ old code
