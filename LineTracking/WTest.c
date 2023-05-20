@@ -72,28 +72,29 @@ void linetracking(){
 			moveCM(1);
 			sleep(200);
 		}
-		else if ((getColorName(S1)==colorGreen) && (getColorName(S4) != colorGreen)){
-			leftNudge();
-			sleep(200);
-			if((getColorName(S1) == colorGreen) || (getColorName(S4) == colorGreen)){
-				return;
+		else if (getColorName(S1)==colorGreen){
+			if (getColorName(S4)==colorBlack){
+				leftNudge();
+				sleep(200);
+				if((getColorName(S1) == colorGreen) || (getColorName(S4) == colorGreen)){
+					return;
+				}
 			}
 			else{
-				rightNudge();
 				leftPointTurn();
 				sleep(200);
 			}
 		}
-		else if((getColorName(S4)==colorGreen) && (getColorName(S1) != colorGreen)){
-			leftNudge();
-			sleep(200);
-			if((getColorName(S1) == colorGreen) || (getColorName(S4) == colorGreen)){
+		else if(getColorName(S4)==colorGreen){
+			if (getColorName(S1)==colorBlack){
+				rightNudge();
 				sleep(200);
-				return;
+				if((getColorName(S1) == colorGreen) || (getColorName(S4) == colorGreen)){
+					sleep(200);
+					return;
+				}
 			}
 			else{
-				sleep(200);
-				rightNudge();
 				rightPointTurn();
 				sleep(200);
 			}
