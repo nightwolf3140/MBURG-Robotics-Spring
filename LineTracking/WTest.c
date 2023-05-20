@@ -85,8 +85,8 @@ void linetracking(){
 				sleep(200);
 			}
 		}
-		else if(getColorName(S4)==colorGreen){
-			if (getColorName(S1)==colorBlack){
+		else if(getColorName(S4) == colorGreen){
+			if(getColorName(S1) == colorBlack){
 				rightNudge();
 				sleep(200);
 				if((getColorName(S1) == colorGreen) || (getColorName(S4) == colorGreen)){
@@ -172,7 +172,8 @@ void init(){ //First line of code to run
 
 task main(){
 	init(); //Config
+	LeftNudge();
 	repeat(forever){
-		linetracking();
+		//linetracking();
 	}
 }
